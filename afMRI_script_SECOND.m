@@ -330,18 +330,19 @@ if Cfg.hardware.serial.oSerial.BytesAvailable
 RT = GetSecs-t_presented;
                 pressed = 1;
                 response = sbuttons;
-            case {15, 25, 35, 45}
-                
-                sbuttons = (sbuttons - 5)/10;
-                pressed = 1;
-                RT = GetSecs-SoundStart-runStart;
-                response = sbuttons;
-            case 5
+%             case {15, 25, 35, 45}
+%                 
+%                 sbuttons = (sbuttons - 5)/10;
+%                 pressed = 1;
+%                 RT = GetSecs-SoundStart-runStart;
+%                 response = sbuttons;
+%             case 5
                 %JUST A SYNCH (unless they also pressed the button)
-        end
-        %myTrials(ExpTrial).resp=response;
+                 myTrials(ExpTrial).resp=response;
         %disp([int2str(response) ', ' num2str(RT,4)])
-        %myTrials(ExpTrial).RT=RT;
+        myTrials(ExpTrial).RT=RT;
+        end
+       
     end
     %t_pressed = GetSecs;
 

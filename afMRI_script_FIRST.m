@@ -2,7 +2,7 @@
 close all;
 %clear all;
 % scanning=true;
-scanning=false;
+scanning=true;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca;
 
@@ -17,7 +17,7 @@ StimTime = 0.5;
 time_to_respond = 3.5;
 fmriblocks = 75;
 fmriTrials = 8;
-debug_mode = 1;
+debug_mode = 0;
 %% for debbuging 
 % numBlocks = 13; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 % numTrials = 25; % number of faces to be shown per block
@@ -439,18 +439,19 @@ if Cfg.hardware.serial.oSerial.BytesAvailable
 RT = GetSecs-t_presented;
                 pressed = 1;
                 response = sbuttons;
-            case {15, 25, 35, 45}
-                
-                sbuttons = (sbuttons - 5)/10;
-                pressed = 1;
-                RT = GetSecs-SoundStart-runStart;
-                response = sbuttons;
-            case 5
-                %JUST A SYNCH (unless they also pressed the button)
-        end
-        %myTrials(ExpTrial).resp=response;
+%             case {15, 25, 35, 45}
+%                 
+%                 sbuttons = (sbuttons - 5)/10;
+%                 pressed = 1;
+%                 RT = GetSecs-SoundStart-runStart;
+%                 response = sbuttons;
+%             case 5
+%                 %JUST A SYNCH (unless they also pressed the button)
+   myTrials(ExpTrial).resp=response;
         %disp([int2str(response) ', ' num2str(RT,4)])
-        %myTrials(ExpTrial).RT=RT;
+        myTrials(ExpTrial).RT=RT;
+        end
+     
     end
     %t_pressed = GetSecs;
 

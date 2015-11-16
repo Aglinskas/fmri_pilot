@@ -16,8 +16,8 @@ t_fixCross = 6; % time that fixation cross is on the screen
 StimTime = 0.5;
 time_to_respond = 3.5;
 debug_mode = 0;
-
-pace = 1 %1 = self paced, 2 = timed
+pace = 2;
+%1 = self paced, 2 = timed
 %% for debbuging 
 % numBlocks = 13; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 % numTrials = 25; % number of faces to be shown per block
