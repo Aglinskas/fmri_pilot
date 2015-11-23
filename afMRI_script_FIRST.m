@@ -2,9 +2,9 @@
 close all;
 %clear all;
 % scanning=true;
-scanning=true;
+scanning=false;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
-sca;
+sca
 
 %% parameters
 %subjID = input('input participant number ','s')
@@ -12,7 +12,7 @@ subjID = datestr(date)
 numBlocks = 15; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = 40; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
-t_fixCross = 6; % time that fixation cross is on the screen
+t_fixCross = 5; % time that fixation cross is on the screen
 StimTime = 0.5;
 time_to_respond = 3.5;
 fmriblocks = 75;
@@ -104,10 +104,7 @@ n_rep = ceil(numTrials / 3); % how many repetitions in the control task?
 myTrials = func_testTrials; %getTrials
 %load('test_myTrials.mat');
 if debug_mode
-    for i = 1 : length(myTrials);
-        myTrials(i).time_to_respond = 0.1;
-        
-    end
+  time_to_respond = 0.1;
     instruct_time = 5; %time in seconds that instructions are on the screen (if not self paced)  
 t_fixCross = 0.1; % time that fixation cross is on the screen
 StimTime = 0.1;
@@ -126,7 +123,7 @@ RestrictKeysForKbCheck(enabledKeyes);
 %% PTB CODE
 
 % set up defaults
-%% PsychDefaultSetup(2);
+%PsychDefaultSetup(2);
 
 % Get the screen numbers
 screens = Screen('Screens');
@@ -284,7 +281,7 @@ ExpStart = GetSecs;
 % Beginning of a block, task instructions, fixation cross
 for expBlock = 1 : fmriblocks
     %% Sets up the task and prompts
-    save(subjID)
+    save(subjID,'myTrials')
     if expBlock == 16
         save(subjID)
         break
@@ -359,17 +356,21 @@ Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % cha
 Screen('Flip', window);
 
 WaitSecs(t_fixCross); % Time that fixation cross is on the screen
+%%
+a_t = ceil(GetSecs - ExpStart);
+while GetSecs - ExpStart < a_t
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% EXPERIMENTAL RUN. 1 loop of code below = 1 trial
 %fmriblocks
   % specify number of iterations
 %for numBlocks * numTrials - 4 = 1 : numBlocks * numTrials
 for ExpTrial = expBlock * fmriTrials - (fmriTrials - 1) : expBlock * fmriTrials; % code that matches blocks, trials, and trials per block
-%for ExpTrial = 1 : fmriTrials
+    %for ExpTrial = 1 : fmriTrials
     pressed=0;
 theImageLocation = myTrials(ExpTrial).filepath; % gets picture from myTrials
 theImage = imread(theImageLocation);
-time_to_respond = myTrials(ExpTrial).time_to_respond;
+% time_to_respond = myTrials(ExpTrial).time_to_respond;
 % Get the size of the image
 [s1, s2, s3] = size(theImage);
 
@@ -425,8 +426,8 @@ DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructi
 Screen('Flip', window); % fix cross on screen waiting for response
 %[secs, keyCode, deltaSecs] = KbWait;
 %WaitSecs(time_to_respond)
-
-while GetSecs<time_to_respond+t_presented
+%GetSecs - ExpStart < ceil(time_to_respond+t_presented + 0.5 - ExpStart)
+while GetSecs<time_to_respond+t_presented + 0.5
 %% scanner button reposne
 % in a while loop when you want to collect the response
 if scanning == true
@@ -468,12 +469,13 @@ if scanning == false
         if a == 1;
         myTrials(ExpTrial).response = keyNames{find(key,'1')};
         myTrials(ExpTrial).RT = RT - t_presented;
-        myTrials(ExpTrial).RT
-        clear a;clear key
+        %myTrials(ExpTrial).RT
+        clear a;clear key; clear RT;
         end
 end
 end
-end 
+%myTrials(ExpTrial).duration = GetSecs - t_presented;
+end
 
 
 %end

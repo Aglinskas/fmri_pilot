@@ -182,10 +182,10 @@ r_cm = Shuffle(m_block);
 
 %%
 
-for i = 1 : length(myTrials);
-%myTrials(i).ISI = ISI;
-myTrials(i).time_to_respond = time_to_respond;
-end
+% for i = 1 : length(myTrials);
+% %myTrials(i).ISI = ISI;
+% myTrials(i).time_to_respond = time_to_respond;
+% end
 
 % %% Skips first trials of control tasks
 % % for monuments task
