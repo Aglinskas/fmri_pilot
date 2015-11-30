@@ -93,50 +93,6 @@ for block_counter = 1: numBlocks
        myTrials(write_line).blockNum = block_counter;
        myTrials(write_line).trialnum = trial;
    end
- 
-
-
-
-   %%
-  
-   %start_line = start_line + trial;
-   %for exp_line = numBlocks * numTrials - (numTrials - 1) : numBlocks * numTrials;
-   %    myTrials.line_test = exp_line
-   %end
-   
- %% Try monuments
-% %  monuments_path = '/Users/aidas_el_cap/Desktop/Experiment/MonumentsForAidas/*.jpg';
-% %    path = '/Users/aidas_el_cap/Desktop/Experiment/MonumentsForAidas/';
-% %    mon_pics = dir(monuments_path);
-% %    r_mon_list = randperm(length(dir(monuments_path)))';
-% %    for i = 1 : numTrials;
-% %    monuments_list{i} = strcat(path, mon_pics(r_mon_list(i)).name);
-% %    end
-% %    monuments_list = monuments_list';
-% %    
-% %    
-% %    for i = 1 : numTrials;
-% %        myTrials(i).monuments = monuments_list{i};
-% %    end
-  % m_start =  length(myTrials) + 1;
-  % for i = m_start : m_start + numTrials
-  %rng(GetSecs);
-%randTask = randperm(length(Task)); %this is where task vector is randomized
-
-  
-  
-%   mstart = length(myTrials)
-%   for i = 1 : numTrials
-%        myTrials(mstart + i).filenames = monuments_list{i};
-%        myTrials(mstart + i).blockNum = 15;
-%        myTrials(mstart + i).trialnum = i;s
-%a = [Shuffle(1:15);Shuffle(1:15);Shuffle(1:15);Shuffle(1:15);Shuffle(1:15)];
-%b=[a(:,1);a(:,2);a(:,3);a(:,4);a(:,5);a(:,6);a(:,7);a(:,8);a(:,9);a(:,10);a(:,11);a(:,12);a(:,13);a(:,14);a(:,15)];
-
-   
-
-
-% end
 end
 
 
@@ -147,9 +103,11 @@ end
 
 for mb = 15:17
 mon_task_index = find([myTrials.blockNum] == mb);
+norm_ll = 1 : numTrials;
+s_ll = Shuffle(norm_ll);
 for ll = 1 : numTrials;
 % a(ll).name = names(ll).name;
-myTrials(mon_task_index(ll)).filepath = strcat(monuments2, '/',names(ll).name);
+myTrials(mon_task_index(ll)).filepath = strcat(monuments2, '/',names(s_ll(ll)).name);
 end
 end
 
