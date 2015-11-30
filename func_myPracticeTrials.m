@@ -15,7 +15,8 @@ numTrials = 40;
 source = func_getPractice;
 %rng((rand * GetSecs));
 %% parameters, fix to feed to the func
-numTrials = length(source);
+%numTrials = length(source);
+numTrials = 4
 numBlocks = 15;
 num_fmriTrials = 8; % has to divide evenly by numTrials
 num_fmriBlocks = 75; % total number of trials / fmriTrials
