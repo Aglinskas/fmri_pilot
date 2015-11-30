@@ -13,7 +13,7 @@ sca;
 subjID = datestr(date)
 load(subjID)
 c_expBlock = expBlock
-when_to_stop = expBlock + 15
+when_to_stop = expBlock + 17
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PTB CODE
 

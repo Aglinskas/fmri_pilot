@@ -16,9 +16,9 @@ source = func_getpic5();
 %rng((rand * GetSecs));
 %% parameters, fix to feed to the func
 numTrials = 40;
-numBlocks = 15;
+numBlocks = 17;
 num_fmriTrials = 8; % has to divide evenly by numTrials
-num_fmriBlocks = 75; % total number of trials / fmriTrials
+num_fmriBlocks = 85; % total number of trials / fmriTrials
 sort = 1; % 1 myTrials in fmri sequence puts, elses
 %control_task = Task{14,1};% which task is control task?
 %monuments_task = Task{15,1};
@@ -54,9 +54,13 @@ Task{14,1} = 'E lo stesso volto rispetto al precedente?'; %control
 Task{14,2} = '1 = Volto diverso\n2 = Stesso volto';
 Task{15,1} = 'E lo stesso monumento del precedente?';
 Task{15,2} = '1 = Monumento diverso\n2 = Stesso monumento';
+Task{16,1} = 'E lo stesso monumento del precedente?';
+Task{16,2} = '1 = Monumento diverso\n2 = Stesso monumento';
+Task{17,1} = 'E lo stesso monumento del precedente?';
+Task{17,2} = '1 = Monumento diverso\n2 = Stesso monumento';
 %%
 %% Task names and task instructions
-randTask = 1 : 15;
+randTask = 1 : 17;
 %randTask = randperm(length(Task));
 for b_count = 1 : numBlocks
 for l_count = b_count * numTrials - (numTrials - 1) : b_count * numTrials;
@@ -141,13 +145,13 @@ end
 %numTrials = 40;
 %a = struct;
 
-
-mon_task_index = find([myTrials.blockNum] == 15);
+for mb = 15:17
+mon_task_index = find([myTrials.blockNum] == mb);
 for ll = 1 : numTrials;
 % a(ll).name = names(ll).name;
 myTrials(mon_task_index(ll)).filepath = strcat(monuments2, '/',names(ll).name);
 end
-
+end
 
 
 
@@ -165,8 +169,9 @@ r_cb = Shuffle(c_block);
 
 % end of Control Task code
 
-%% Monuments task code 
-m_block = find([myTrials.blockNum] == 15);
+%% Monuments task code
+for mb = 15:17
+m_block = find([myTrials.blockNum] == mb);
 % for i = 1 : numTrials
 %     myTrials(m_block(1) + i - 1).filenames = myTrials(i).monuments;
 % end
@@ -176,6 +181,8 @@ r_cm = Shuffle(m_block);
     for i_OM = 1 : n_rep %repeats some of the faces
         myTrials(r_cm(i_OM) + 1).filepath = myTrials(r_cm(i_OM)).filepath;
     end
+end
+
 % fmriblocks
 % 
 
@@ -229,7 +236,7 @@ s_line = [0;8;16;24;32];
   r_fmri_run = 1:5;
 for k = 1 : 5;
      %r_fmri_blocks = Shuffle(1:15);
-     for o = 0 : 14
+     for o = 0 : 16
 for i = 1 : num_fmriTrials;
     myTrials(s_line(k) + i + o*40).fmriRun = r_fmri_run(k);
 end
@@ -237,7 +244,8 @@ end
 end
 [~,index] = sortrows([myTrials.fmriRun].'); myTrials = myTrials(index); clear index;
 
-rand_fmri_b = [Shuffle(1:15),Shuffle(16:30),Shuffle(31:45),Shuffle(46:60),Shuffle(61:75)]';
+%rand_fmri_b = [Shuffle(1:15),Shuffle(16:30),Shuffle(31:45),Shuffle(46:60),Shuffle(61:75)]';
+rand_fmri_b = [Shuffle(1:17),Shuffle(18:34),Shuffle(35:51),Shuffle(52:68),Shuffle(69:85)]';
 s_line = 0;
 for i = 1 : num_fmriBlocks;
     for k = 1: num_fmriTrials;

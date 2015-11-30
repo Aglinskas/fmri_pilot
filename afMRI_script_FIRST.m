@@ -9,13 +9,13 @@ sca
 %% parameters
 %subjID = input('input participant number ','s')
 subjID = datestr(date)
-numBlocks = 15; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
+numBlocks = 17; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = 40; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
 t_fixCross = 5; % time that fixation cross is on the screen
 StimTime = 0.5;
 time_to_respond = 3.5;
-fmriblocks = 75;
+fmriblocks = 85;
 fmriTrials = 8;
 debug_mode = 0;
 %% for debbuging 
@@ -33,41 +33,45 @@ debug_mode = 0;
 
 % control and monument tasks defined below
 %% Tasks
-Task{1,1} = 'Di che colore sono i capelli di questa persona?'; %Control or baseline
-Task{1,2} = '1 = Biondi\n2 = Scuri\n3 = Altro\n4 = La persona è calva';
-Task{2,1} = 'Quanti anni avevi quando hai sentito parlare\ndi questa persona per la prima volta?'; %episodic
-Task{2,2} = '1 = Meno di 7 anni\n2 = Tra 8 e 17\n3 = Tra 18 ed ora\n4 = Non ne ho mai sentito parlare';
-Task{3,1} = 'Quanto ritieni sia fisicamente attraente questa persona?';
-Task{3,2} = '1 = Molto attraente\n2 = Attraente\n3 = Nella media\n4 = Non proprio attraente';
-Task{4,1} = 'Quanto ritieni sia amichevole questa persona?';
-Task{4,2} = '1 = Molto amichevole\n2 = Amichevole\n3 = Non proprio amichevole\n4 = Non mi avvicinerei';
-Task{5,1} = 'Quanto ritieni sia affidabile questa persona?';
-Task{5,2} = '1 = Molto affidabile\n2 = Abbastanza affidabile\n3 = Non proprio affidabile\n4 = Assolutamente non affidabile';
-Task{6,1} = 'Associ questa persona ad emozioni più positive o più negative?';
-Task{6,2} = '1 = Emozioni molto positive\n2 = Emozioni in qualche modo positive\n3 = Emozioni in qualche modo negative\n4 = Emozioni negative';
-Task{7,1} = 'Hai mai visto questa persona prima?/Riconosci il suo volto?'; % semantic access 1
-Task{7,2} = '1 = Sì\n2 = No, mai vista prima';
-Task{8,1} = 'Se ti chiedessero di scrivere un tema\nsu questa persona, quanto potresti scrivere?';%semantic access 2
-Task{8,2} = '1 = Una pagina\n2 = Un paragrafo\n3 = Una frase\n4 = Niente';
-Task{9,1} = 'Quanto è comune il nome proprio di questa persona?';
-Task{9,2} = '1 = Molto comune\n2 = Non molto comune\n3 = E? l?unica persona che conosco con quel nome\n4 = Non conosco il nome di questa persona';
-Task{10,1} = 'Quanti fatti riesci a ricordare di questa persona?';
-Task{10,2} = '1 = Più di 5 compreso il suo nome\n2 = Quattro o cinque\n3 = Due o tre\n4 = Non conosco questa persona';
-Task{11,1} = 'Che lavoro fa questa persona?';
-Task{11,2} = '1 = Televisivo/Attore\n2 = Cantante/Musicista\n3 = Politico/Uomo d?affari\n4 = Altro/Non so'; %1 = Personaggio televisivo/Attore\n2
-Task{12,1} = 'Quanto è distintivo e distinguibile il volto di questa persona?';
-Task{12,2} = '1 = Non lo confonderei con nessun altro\n2 = Abbastanza distintivo\n3 = Confondibile\n4 = Potrebbe essere tranquillamente confuso\n    con qualcun altro';
-Task{13,1} = 'Considerate tutte le informazioni a tua disposizione\n(se conosci o meno questa persona);\nQuanto ritieni sia brava o cattiva questa persona?';
-Task{13,2} = '1 = Brava persona\n2 = Sopra la media / una persona per bene\n3 = Sotto la media/non proprio una persona per bene\n4 = Brutta persona';
-Task{14,1} = 'E lo stesso volto rispetto al precedente?'; %control
-Task{14,2} = '1 = Volto diverso\n2 = Stesso volto';
-Task{15,1} = 'E lo stesso monumento del precedente?';
-Task{15,2} = '1 = monumento diverso\n2 = Stesso monumento';
+% Task{1,1} = 'Di che colore sono i capelli di questa persona?'; %Control or baseline
+% Task{1,2} = '1 = Biondi\n2 = Scuri\n3 = Altro\n4 = La persona è calva';
+% Task{2,1} = 'Quanti anni avevi quando hai sentito parlare\ndi questa persona per la prima volta?'; %episodic
+% Task{2,2} = '1 = Meno di 7 anni\n2 = Tra 8 e 17\n3 = Tra 18 ed ora\n4 = Non ne ho mai sentito parlare';
+% Task{3,1} = 'Quanto ritieni sia fisicamente attraente questa persona?';
+% Task{3,2} = '1 = Molto attraente\n2 = Attraente\n3 = Nella media\n4 = Non proprio attraente';
+% Task{4,1} = 'Quanto ritieni sia amichevole questa persona?';
+% Task{4,2} = '1 = Molto amichevole\n2 = Amichevole\n3 = Non proprio amichevole\n4 = Non mi avvicinerei';
+% Task{5,1} = 'Quanto ritieni sia affidabile questa persona?';
+% Task{5,2} = '1 = Molto affidabile\n2 = Abbastanza affidabile\n3 = Non proprio affidabile\n4 = Assolutamente non affidabile';
+% Task{6,1} = 'Associ questa persona ad emozioni più positive o più negative?';
+% Task{6,2} = '1 = Emozioni molto positive\n2 = Emozioni in qualche modo positive\n3 = Emozioni in qualche modo negative\n4 = Emozioni negative';
+% Task{7,1} = 'Hai mai visto questa persona prima?/Riconosci il suo volto?'; % semantic access 1
+% Task{7,2} = '1 = Sì\n2 = No, mai vista prima';
+% Task{8,1} = 'Se ti chiedessero di scrivere un tema\nsu questa persona, quanto potresti scrivere?';%semantic access 2
+% Task{8,2} = '1 = Una pagina\n2 = Un paragrafo\n3 = Una frase\n4 = Niente';
+% Task{9,1} = 'Quanto è comune il nome proprio di questa persona?';
+% Task{9,2} = '1 = Molto comune\n2 = Non molto comune\n3 = E? l?unica persona che conosco con quel nome\n4 = Non conosco il nome di questa persona';
+% Task{10,1} = 'Quanti fatti riesci a ricordare di questa persona?';
+% Task{10,2} = '1 = Più di 5 compreso il suo nome\n2 = Quattro o cinque\n3 = Due o tre\n4 = Non conosco questa persona';
+% Task{11,1} = 'Che lavoro fa questa persona?';
+% Task{11,2} = '1 = Televisivo/Attore\n2 = Cantante/Musicista\n3 = Politico/Uomo d?affari\n4 = Altro/Non so'; %1 = Personaggio televisivo/Attore\n2
+% Task{12,1} = 'Quanto è distintivo e distinguibile il volto di questa persona?';
+% Task{12,2} = '1 = Non lo confonderei con nessun altro\n2 = Abbastanza distintivo\n3 = Confondibile\n4 = Potrebbe essere tranquillamente confuso\n    con qualcun altro';
+% Task{13,1} = 'Considerate tutte le informazioni a tua disposizione\n(se conosci o meno questa persona);\nQuanto ritieni sia brava o cattiva questa persona?';
+% Task{13,2} = '1 = Brava persona\n2 = Sopra la media / una persona per bene\n3 = Sotto la media/non proprio una persona per bene\n4 = Brutta persona';
+% Task{14,1} = 'E lo stesso volto rispetto al precedente?'; %control
+% Task{14,2} = '1 = Volto diverso\n2 = Stesso volto';
+% Task{15,1} = 'E lo stesso monumento del precedente?';
+% Task{15,2} = '1 = monumento diverso\n2 = Stesso monumento';
+% Task{16,1} = 'E lo stesso monumento del precedente?';
+% Task{16,2} = '1 = monumento diverso\n2 = Stesso monumento';
+% Task{17,1} = 'E lo stesso monumento del precedente?';
+% Task{17,2} = '1 = monumento diverso\n2 = Stesso monumento';
 
-control_task = 14; % which task is control task?
-monuments_task = 15;
+% control_task = 14; % which task is control task?
+% monuments_task = 15;
 
-n_rep = ceil(numTrials / 3); % how many repetitions in the control task?
+%n_rep = ceil(numTrials / 3); % how many repetitions in the control task?
 
 %Task{1,1} = 'What colour is this persons hair?'; %Control or baseline
 %Task{1,2} = '1 = Blond\n2 = Dark\n3 = Other\n4 = Person has no hair';
@@ -282,7 +286,7 @@ ExpStart = GetSecs;
 for expBlock = 1 : fmriblocks
     %% Sets up the task and prompts
     save(subjID,'myTrials')
-    if expBlock == 16
+    if expBlock == 18
         save(subjID)
         break
     end
@@ -497,6 +501,14 @@ save(expName{1,1},'myTrials');
 save(wrkspc{1,1})
 % Clear the screen
 sca;
+
+%to name the variables:
+% for i = 1 : length([myTrials])
+%    a = strsplit(myTrials(i).filepath, '/');
+%     myTrials(i).name = a{2};
+%     myTrials(i).stimKind = a{1};
+% end
+
 
 % 
 % t_now = GetSecs
