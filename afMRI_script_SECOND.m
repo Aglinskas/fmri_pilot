@@ -1,6 +1,6 @@
 % Clear the workspace
 close all;
-clear all;
+%clear all;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca;
 
@@ -10,10 +10,11 @@ sca;
 %         break
 %     end
 % % %  
-subjID = datestr(date)
+%subjID = datestr(date)
+subjID = 'S99'
 load(subjID)
 c_expBlock = expBlock
-when_to_stop = expBlock + 15
+when_to_stop = expBlock + 17
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PTB CODE
 
@@ -250,6 +251,10 @@ Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % cha
 Screen('Flip', window);
 
 WaitSecs(t_fixCross); % Time that fixation cross is on the screen
+%%
+a_t = ceil(GetSecs - ExpStart);
+while GetSecs - ExpStart < a_t
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% EXPERIMENTAL RUN. 1 loop of code below = 1 trial
 %fmriblocks
@@ -260,7 +265,7 @@ for ExpTrial = expBlock * fmriTrials - (fmriTrials - 1) : expBlock * fmriTrials;
     pressed=0;
 theImageLocation = myTrials(ExpTrial).filepath; % gets picture from myTrials
 theImage = imread(theImageLocation);
-time_to_respond = myTrials(ExpTrial).time_to_respond;
+% time_to_respond = myTrials(ExpTrial).time_to_respond;
 % Get the size of the image
 [s1, s2, s3] = size(theImage);
 
@@ -317,7 +322,7 @@ Screen('Flip', window); % fix cross on screen waiting for response
 %[secs, keyCode, deltaSecs] = KbWait;
 %WaitSecs(time_to_respond)
 
-while GetSecs<time_to_respond+t_presented
+while GetSecs<time_to_respond+t_presented + 0.5
 %% scanner button reposne
 % in a while loop when you want to collect the response
 if scanning == true
