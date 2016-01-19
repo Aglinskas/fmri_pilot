@@ -10,15 +10,18 @@ sca
 %subjID = input('input participant number ','s')
 %subjID = datestr(date)
 subjID = 'S99'
-numBlocks = 17; % how many bloccks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
-numTrials = 40; % number of faces to be shown per block
+%numBlocks = 2; % how many bloccks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
+%numTrials = 40; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
 t_fixCross = 5; % time that fixation cross is on the screen
 StimTime = 0.5;
-time_to_respond = 3.5;
-fmriblocks = 85;
-fmriTrials = 8;
+time_to_respond = 1.5;
+fmriblocks = 10;
+fmriTrials = 16;
 debug_mode = 0;
+
+numTrials = 80;
+numBlocks = 2;
 %% for debbuging 
 % numBlocks = 13; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 % numTrials = 25; % number of faces to be shown per block
@@ -106,7 +109,7 @@ debug_mode = 0;
 %Task{15,2} = '1 = Different face\n2 = Same face
 
 %% load random pics for the experiment
-myTrials = func_testTrials; %getTrials
+myTrials = loc_func_testTrials; %getTrials
 %load('test_myTrials.mat');
 if debug_mode
   time_to_respond = 0.1;

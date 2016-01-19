@@ -1,19 +1,23 @@
-% Clear the workspace
+r% Clear the workspace
 close all;
 %clear all;
-
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
+sca;   
 myTrials = func_myPracticeTrials;
 %% parameters
 %subjID = input('input participant number ','s')
 subjID = datestr(date)
-numBlocks = 15; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
+numBlocks = 15; % how many blocks t                                                                       1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = length(myTrials) / 15; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
+t_fixCross = 2; % time that fix at nnmn        sd ion cross is on the screen
 StimTime = 0.5;
+time_to_respond = 1;
 debug_mode = 0;
+pace = 2 ;
 %1 = self paced, 2 = timed
 %% for debbuging 
+% numBlocks = 13; % how many blocks to run    n      mm      in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 % numTrials = 25; % number of faces to be shown per block
 % instruct_time = 1; %time in seconds that instructions are on the screen (if not self paced)  
 % t_fixCross = 0.5; % time that fixation cross is on the screen
@@ -28,7 +32,7 @@ debug_mode = 0;
 % control and monument tasks defined below
 %% Tasks
 % Task{1,1} = 'Di che colore sono i capelli di questa persona?'; %Control or baseline
-% Task{1,2} = '1 = Biondi\n2 = Scuri\n3 = Altro\n4 = La persona è calva';
+% Task{1,2} = '1 = Biondi\n2 = Scuri\n3 = Altro\n4 = La persona ? calva';
 % Task{2,1} = 'Quanti anni avevi quando hai sentito parlare\ndi questa persona per la prima volta?'; %episodic
 % Task{2,2} = '1 = Meno di 7 anni\n2 = Tra 8 e 17\n3 = Tra 18 ed ora\n4 = Non ne ho mai sentito parlare';
 % Task{3,1} = 'Quanto ritieni sia fisicamente attraente questa persona?';
@@ -37,19 +41,19 @@ debug_mode = 0;
 % Task{4,2} = '1 = Molto amichevole\n2 = Amichevole\n3 = Non proprio amichevole\n4 = Non mi avvicinerei';
 % Task{5,1} = 'Quanto ritieni sia affidabile questa persona?';
 % Task{5,2} = '1 = Molto affidabile\n2 = Abbastanza affidabile\n3 = Non proprio affidabile\n4 = Assolutamente non affidabile';
-% Task{6,1} = 'Associ questa persona ad emozioni più positive o più negative?';
+% Task{6,1} = 'Associ questa persona ad emozioni pi? positive o pi? negative?';
 % Task{6,2} = '1 = Emozioni molto positive\n2 = Emozioni in qualche modo positive\n3 = Emozioni in qualche modo negative\n4 = Emozioni negative';
 % Task{7,1} = 'Hai mai visto questa persona prima?/Riconosci il suo volto?'; % semantic access 1
-% Task{7,2} = '1 = Sì\n2 = No, mai vista prima';
+% Task{7,2} = '1 = S?\n2 = No, mai vista prima';
 % Task{8,1} = 'Se ti chiedessero di scrivere un tema\nsu questa persona, quanto potresti scrivere?';%semantic access 2
 % Task{8,2} = '1 = Una pagina\n2 = Un paragrafo\n3 = Una frase\n4 = Niente';
-% Task{9,1} = 'Quanto è comune il nome proprio di questa persona?';
+% Task{9,1} = 'Quanto ? comune il nome proprio di questa persona?';
 % Task{9,2} = '1 = Molto comune\n2 = Non molto comune\n3 = E? l?unica persona che conosco con quel nome\n4 = Non conosco il nome di questa persona';
 % Task{10,1} = 'Quanti fatti riesci a ricordare di questa persona?';
-% Task{10,2} = '1 = Più di 5 compreso il suo nome\n2 = Quattro o cinque\n3 = Due o tre\n4 = Non conosco questa persona';
-% Task{11,1} = 'Chi è questa persona?';
+% Task{10,2} = '1 = Pi? di 5 compreso il suo nome\n2 = Quattro o cinque\n3 = Due o tre\n4 = Non conosco questa persona';
+% Task{11,1} = 'Chi ? questa persona?';
 % Task{11,2} = '1 = Personaggio televisivo/Attore\n2 = Cantante/Musicista\n3 = Politico/Uomo d?affari\n4 = Altro/Non so';
-% Task{12,1} = 'Quanto è distintivo e distinguibile il volto di questa persona?';
+% Task{12,1} = 'Quanto ? distintivo e distinguibile il volto di questa persona?';
 % Task{12,2} = '1 = Non lo confonderei con nessun altro\n2 = Abbastanza distintivo\n3 = Confondibile\n4 = Potrebbe essere tranquillamente confuso\n    con qualcun altro';
 % Task{13,1} = 'Considerate tutte le informazioni a tua disposizione\n(se conosci o meno questa persona);\nQuanto ritieni sia brava o cattiva questa persona?';
 % Task{13,2} = '1 = Brava persona\n2 = Sopra la media / una persona per bene\n3 = Sotto la media/non proprio una persona per bene\n4 = Brutta persona';
@@ -110,6 +114,11 @@ end
 %myTrials = func_getmyTrials2(numBlocks, numTrials,Task, time_to_respond, fmriblocks, fmriTrials,control_task, monuments_task);
 %myTrials2 = func_getmyTrials2(numBlocks, numTrials, Task, instruct_time, t_fixCross, StimTime, time_to_respond, fmriblocks, fmriTrials);
 %% Set up KbCheck and keyboard related things
+% enabledKeyes = [30;31;32;33;44];
+% responseKeyes = [30;31;32;33];
+% spaceKey = [44];
+% keyNames = KbName('KeyNames');
+% RestrictKeysForKbCheck(enabledKeyes);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PTB CODE
@@ -304,6 +313,9 @@ Screen('Flip', window);
  %RestrictKeysForKbCheck(responseKeyes); % re-enabled response keyes
 %else 
 if pace == 1
+   % RestrictKeysForKbCheck(spaceKey);
+    pause
+   % RestrictKeysForKbCheck(enabledKeyes);
 else
     WaitSecs(instruct_time);
 end
@@ -332,6 +344,7 @@ Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % cha
 % Flip to the screen
 Screen('Flip', window);
 if pace == 1
+    pause
 else
 WaitSecs(t_fixCross);
 end% Time that fixation cross is on the screen
@@ -403,6 +416,7 @@ Screen('Flip', window); % fix cross on screen waiting for response
 %WaitSecs(time_to_respond)
 
 if pace == 1
+    pause
 else WaitSecs(time_to_respond)
 end
 %% scanner button reposne
