@@ -2,9 +2,7 @@
 close all;
 %clear all;
 
-
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
-sca;
 myTrials = func_myPracticeTrials;
 %% parameters
 %subjID = input('input participant number ','s')
@@ -12,14 +10,10 @@ subjID = datestr(date)
 numBlocks = 15; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = length(myTrials) / 15; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
-t_fixCross = 6; % time that fixation cross is on the screen
 StimTime = 0.5;
-time_to_respond = 3.5;
 debug_mode = 0;
-pace = 2  ;
 %1 = self paced, 2 = timed
 %% for debbuging 
-% numBlocks = 13; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 % numTrials = 25; % number of faces to be shown per block
 % instruct_time = 1; %time in seconds that instructions are on the screen (if not self paced)  
 % t_fixCross = 0.5; % time that fixation cross is on the screen
@@ -116,11 +110,6 @@ end
 %myTrials = func_getmyTrials2(numBlocks, numTrials,Task, time_to_respond, fmriblocks, fmriTrials,control_task, monuments_task);
 %myTrials2 = func_getmyTrials2(numBlocks, numTrials, Task, instruct_time, t_fixCross, StimTime, time_to_respond, fmriblocks, fmriTrials);
 %% Set up KbCheck and keyboard related things
-enabledKeyes = [30;31;32;33;44];
-responseKeyes = [30;31;32;33];
-spaceKey = [44];
-keyNames = KbName('KeyNames');
-RestrictKeysForKbCheck(enabledKeyes);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PTB CODE
@@ -315,9 +304,6 @@ Screen('Flip', window);
  %RestrictKeysForKbCheck(responseKeyes); % re-enabled response keyes
 %else 
 if pace == 1
-    RestrictKeysForKbCheck(spaceKey);
-    KbWait
-    RestrictKeysForKbCheck(enabledKeyes);
 else
     WaitSecs(instruct_time);
 end
@@ -346,7 +332,6 @@ Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % cha
 % Flip to the screen
 Screen('Flip', window);
 if pace == 1
-    KbWait
 else
 WaitSecs(t_fixCross);
 end% Time that fixation cross is on the screen
@@ -418,7 +403,6 @@ Screen('Flip', window); % fix cross on screen waiting for response
 %WaitSecs(time_to_respond)
 
 if pace == 1
-    KbWait
 else WaitSecs(time_to_respond)
 end
 %% scanner button reposne

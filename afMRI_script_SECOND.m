@@ -10,7 +10,8 @@ sca;
 %         break
 %     end
 % % %  
-subjID = datestr(date)
+%subjID = datestr(date)
+subjID = 'S99'
 load(subjID)
 c_expBlock = expBlock
 when_to_stop = expBlock + 17
