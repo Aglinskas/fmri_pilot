@@ -1,0 +1,30 @@
+%Task{1,1} = 'What colour is this persons hair?'; %Control or baseline
+%Task{1,2} = '1 = Blond  2 = Dark  3 = Other  4 = Person has no hair';
+%Task{2,1} = 'How old were you when you first heard of this person?'; %episodic
+%Task{2,2} = '1 = Less than 7 years old  2 = Between 8 and 17  3 = Between 18 and now  4 = Never seen the person before';
+%Task{3,1} = 'How attractive do you find this persons face?';
+%Task{3,2} = '1 = Very attractive  2 = Attractive  3 = Average  4 = Not really attractive';
+%Task{4,1} = 'How friendly is this person?';
+%Task{4,2} = '1 = Very friendly  2 = Friendly  3 = Not really friendly  4 = Would not approach';
+%Task{5,1} = 'How trustworthy is this person?';
+%Task{5,2} = '1 = very trustworthy  2 = quite trustworthy  3 = not really trustworthy  4 = not at all trustworthy';
+%Task{6,1} = 'Do you associate this person more with positive or negative emotions?';
+%Task{6,2} = '1 = Very postive emotions  2 = somewhat positive emotions  3 = somewhat negative emotions  4 = negative emotions';
+%Task{7,1} = 'Have you seen this person before'; % semantic access 1
+%Task{7,2} = '1 = Yes, I have  2 = No, never seen them before';
+%Task{8,1} = 'If asked to write an essay about this person  How much could you write about them?';%semantic access 2
+%Task{8,2} = '1 = Page  2 = Paragraph  3 = Sentence  4 = None';
+%Task{9,1} = 'How common is this persons name?'
+%Task{9,2} = '1 = Very common  2 = Not very common  3 = They are the only person I know with that name  4 = I dont know this persons name'
+%Task{10,1} = 'How many facts can you remember about this person'
+%Task{10,2} = '1 = More than 5 as well as their name  2 = Four or Five  3 = Two or three  4 = Dont know the person'
+%Task{11,1} = 'Who is this person?'
+%Task{11,2} = '1 = TV/Movie persona  2 = Singer/Musician  3 = Politian/Businessman  4 = Other/Dont know'
+%Task{12,1} = 'How distinct / distinguishable is this persons face to you?'
+%Task{12,2} = '1 = Would not confuse it with anyone else  2 = Quite distinct  3 = Confusable  4 = Would easily confuse with someone else'
+%Task{13,1} = 'Consider all the information available to you (whether you know the person or not);  How good/bad as a person do you think they are?'
+%Task{13,2} = '1 = Good person  2 = Above average / Decent person  3 = Below average / Not a good person  4 = Bad person'
+%Task{14,1} = 'How old were you when you first heard of this person?'; %episodic
+%Task{14,2} = '1 = Ive known them for as long as I can remember  2 = I was in my teenage years  3 = As an adult  4 = Ive Never seen the person before';
+%Task{15,1} = 'Is this the same face as the one before?' %control
+%Task{15,2} = '1 = Different face  2 = Same face
