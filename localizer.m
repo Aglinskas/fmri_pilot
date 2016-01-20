@@ -2,7 +2,7 @@
 close all;
 %clear all;
 % scanning=true;
-scanning=false;
+scanning=true;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca
 
