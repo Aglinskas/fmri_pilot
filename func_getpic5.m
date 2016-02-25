@@ -1,8 +1,11 @@
 function a = func_getpic5()
-
+exprm  = 2;
 stimuli = 'People'; % directory of the faces folder
-names = 'newNames.txt'; %directory to names.txt
-
+if exprm == 2;
+    names = 'AllNames.txt';
+else
+names = 'TopNames.txt'; %directory to names.txt
+end
 % Read in peoples names from the .txt file
 fileID = fopen(names,'r');
 C = textscan(fileID,'%q %*q %*d %f','Delimiter',',');
@@ -25,6 +28,9 @@ fclose(fileID);
 % 
 % %%%
 for i = 1 : length(C{1,1});
+    while length(dir(fullfile(stimuli,C{1,1}{i,1},'selected/*.jpg'))) == 0;
+        i = i + 1;
+    end
 selected_name = C{1,1}{i,1}; % just an initial value
 %num_people = length(C{1,1});
 %C{1,1} has all the names C{1,1}{2,1} is second one on the list. 1-294
@@ -72,6 +78,17 @@ clear tempd;
 %folder_contents = dir(path_to_name);
 %num_pics = length(folder_contents(~[folder_contents.isdir])); 
 end
+
+if exprm == 2
+    l = numel(a)
+    for p = l:-1:1
+        if isempty(a(p).name)
+            a(p) = []
+             l = numel(a)
+        end
+    end
+end
+
 % folder_contents(~[folder_contents.isdir]).name lists all the pics
 %chosen_path{1,1}(~[chosen_path{1,1}.isdir]).name
 %select_random_pic_num = randi([3 num_pics + 2],1);

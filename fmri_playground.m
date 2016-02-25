@@ -7,21 +7,24 @@ Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes.
 sca
 
 %% parameters
+% to change instruction language,change variable 'ins' in edit func_testTrials
+% to change between all faces and top40 faces, change exprm = 2; in edit func_getpic5
+
+offset = 0
+ins_position = 2 
+
 %subjID = input('input participant number ','s')
 %subjID = datestr(date)
 subjID = 'S99'
-%numBlocks = 2; % how many bloccks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
-%numTrials = 40; % number of faces to be shown per block
+numBlocks = 17; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
+numTrials = 40; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
-t_fixCross = 5; % time that fixation cross is on the screen
-StimTime = 0.5;
-time_to_respond = 1.5;
-fmriblocks = 10;
-fmriTrials = 16;
+t_fixCross = 4; % time that fixation cross is on the screen
+StimTime = .5;
+time_to_respond = 4 - StimTime;
+fmriblocks = 85;
+fmriTrials = 8;
 debug_mode = 0;
-
-numTrials = 80;
-numBlocks = 2;
 %% for debbuging 
 % numBlocks = 13; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 % numTrials = 25; % number of faces to be shown per block
@@ -109,7 +112,8 @@ numBlocks = 2;
 %Task{15,2} = '1 = Different face\n2 = Same face
 
 %% load random pics for the experiment
-myTrials = loc_func_testTrials; %getTrials
+myTrials = func_testTrials; %getTrials
+
 %load('test_myTrials.mat');
 if debug_mode
   time_to_respond = 0.1;
@@ -405,15 +409,16 @@ imageTexture = Screen('MakeTexture', window, theImage);
  e3 = yCenter - s1/2 - 150;
  e4 = yCenter + s1/2 - 150;
  
- Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);                                     
-                                      
+ 
+Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);                                     
+%Screen('DrawTexture', window, imageTexture, [], [e1 - 25 e3 - 33 e2 + 25 e4 + 25],0);                                        
 %Screen('DrawTexture', window, imagecTexture, [], [570 150 870 550],0); % only works on 1440 * 900 screen 
 %570 870 250 650
 %Screen('DrawTexture', window, imageTexture, [255 255 0], [255 255 0], 0);%
 lower_third = 600;
 
 %DrawFormattedText(window, taskIntruct, 'left', cCenter, white, [],[],[],[],[],[600 600 840 700]); % instructions below the image
-
+%DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the image
 % Flip to the screen
 Screen('Flip', window); % the image is now on the screen
 timePresented = GetSecs - ExpStart;
@@ -428,14 +433,17 @@ myTrials(ExpTrial).time_presented = timePresented;
 WaitSecs(StimTime);
 % Now fill the screen GREY
 Screen('FillRect', window, grey); % screen  is now blanc
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
-DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]);% fix cross after face
+%test instructions
+ins_pos = 0
+DrawFormattedText(window, taskIntruct, cCenter, 600, white); 
+%DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
 % Flip to the screen
 Screen('Flip', window); % fix cross on screen waiting for response
 %[secs, keyCode, deltaSecs] = KbWait;
 %WaitSecs(time_to_respond)
 %GetSecs - ExpStart < ceil(time_to_respond+t_presented + 0.5 - ExpStart)
-while GetSecs<time_to_respond+t_presented + 0.5
+while GetSecs<time_to_respond+t_presented + 0.5 %0.5 offset seems important, dunno why tho
 %% scanner button reposne
 % in a while loop when you want to collect the response
 if scanning == true
