@@ -8,7 +8,7 @@ myTrials = func_myPracticeTrials;
 %subjID = input('input participant number ','s')
 subjID = datestr(date)
 numBlocks = 15; % how many blocks t                                                                       1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
-numTrials = length(myTrials) / 15; % number of faces to be shown per block
+numTrials = length(myTrials) / 15; % numRestrictKeysForKbCheckber of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
 t_fixCross = 2; % time that fix at nnmn        sd ion cross is on the screen
 StimTime = 0.5;

@@ -1,5 +1,5 @@
 function a = func_getpic5()
-exprm  = 2;
+exprm  = 1;
 stimuli = 'People'; % directory of the faces folder
 if exprm == 2;
     names = 'AllNames.txt';
@@ -28,8 +28,10 @@ fclose(fileID);
 % 
 % %%%
 for i = 1 : length(C{1,1});
+    if exprm == 2
     while length(dir(fullfile(stimuli,C{1,1}{i,1},'selected/*.jpg'))) == 0;
         i = i + 1;
+    end
     end
 selected_name = C{1,1}{i,1}; % just an initial value
 %num_people = length(C{1,1});
@@ -49,8 +51,8 @@ end
 a(i).filenames = tempc;
 a(i).filepaths = tempd;
 a(i).imShow = zeros(1,length(tempc));
-clear tempc;
-clear tempd;
+tempc = {};
+tempd = {};
 %B0 = selected_name2{1,1}; %strcat makes a cell, this takes the value from it
 %B1 = dir(B0); % holds the contents of the directory
 % listDir(~[listDir.isdir]).name

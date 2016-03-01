@@ -1,34 +1,23 @@
 % Clear the workspace
 close all;
 %clear all;
-% scanning=true;
-scanning=false;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
-sca
-%%
-this_script = strsplit(which('fmri_playground.m'),'/');
-cd(fullfile('/',this_script{1:numel(this_script)-1}))
+sca;   
+myTrials = func_myPracticeTrials(7); %ins = 2, gives english instructions, 1= italian
 %% parameters
-% to change instruction language,change variable 'ins' in edit func_testTrials
-% to change between all faces and top40 faces, change exprm = 2; in edit func_getpic5
-
-offset = 0
-ins_position = 2 ;
-
 %subjID = input('input participant number ','s')
-%subjID = datestr(date)
-subjID = 'S99'
-numBlocks = 17; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
-numTrials = 40; % number of faces to be shown per block
-instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
-t_fixCross = 4; % time that fixation cross is on the screen
-StimTime = .5;
-time_to_respond = 4 - StimTime;
-fmriblocks = 85;
-fmriTrials = 8;
+subjID = datestr(date)
+numBlocks = 15; % how many blocks       22113122   1222t                                                                       1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
+numTrials = length(myTrials) / 15; % number of faces to be shown per block
+instruct_time = 2; %time in seconds that instructions are on the screen (if not self paced)  
+t_fixCross = 2; % time that fix at nnmn        sd ion cross is on the screen
+StimTime = 0.5;
+time_to_respond = 1;
 debug_mode = 0;
+pace = 3;
+%1 = self paced, 2 = timed, 3 = newPractice
 %% for debbuging 
-% numBlocks = 13; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
+% numBlocks = 13; % how many blocks to run    n      mm      in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 % numTrials = 25; % number of faces to be shown per block
 % instruct_time = 1; %time in seconds that instructions are on the screen (if not self paced)  
 % t_fixCross = 0.5; % time that fixation cross is on the screen
@@ -62,25 +51,21 @@ debug_mode = 0;
 % Task{9,2} = '1 = Molto comune\n2 = Non molto comune\n3 = E? l?unica persona che conosco con quel nome\n4 = Non conosco il nome di questa persona';
 % Task{10,1} = 'Quanti fatti riesci a ricordare di questa persona?';
 % Task{10,2} = '1 = Pi? di 5 compreso il suo nome\n2 = Quattro o cinque\n3 = Due o tre\n4 = Non conosco questa persona';
-% Task{11,1} = 'Che lavoro fa questa persona?';
-% Task{11,2} = '1 = Televisivo/Attore\n2 = Cantante/Musicista\n3 = Politico/Uomo d?affari\n4 = Altro/Non so'; %1 = Personaggio televisivo/Attore\n2
+% Task{11,1} = 'Chi ? questa persona?';
+% Task{11,2} = '1 = Personaggio televisivo/Attore\n2 = Cantante/Musicista\n3 = Politico/Uomo d?affari\n4 = Altro/Non so';
 % Task{12,1} = 'Quanto ? distintivo e distinguibile il volto di questa persona?';
 % Task{12,2} = '1 = Non lo confonderei con nessun altro\n2 = Abbastanza distintivo\n3 = Confondibile\n4 = Potrebbe essere tranquillamente confuso\n    con qualcun altro';
 % Task{13,1} = 'Considerate tutte le informazioni a tua disposizione\n(se conosci o meno questa persona);\nQuanto ritieni sia brava o cattiva questa persona?';
 % Task{13,2} = '1 = Brava persona\n2 = Sopra la media / una persona per bene\n3 = Sotto la media/non proprio una persona per bene\n4 = Brutta persona';
-% Task{14,1} = 'E lo stesso volto rispetto al precedente?'; %control
+% Task{14,1} = 'E? lo stesso volto rispetto al precedente?'; %control
 % Task{14,2} = '1 = Volto diverso\n2 = Stesso volto';
-% Task{15,1} = 'E lo stesso monumento del precedente?';
-% Task{15,2} = '1 = monumento diverso\n2 = Stesso monumento';
-% Task{16,1} = 'E lo stesso monumento del precedente?';
-% Task{16,2} = '1 = monumento diverso\n2 = Stesso monumento';
-% Task{17,1} = 'E lo stesso monumento del precedente?';
-% Task{17,2} = '1 = monumento diverso\n2 = Stesso monumento';
+% Task{15,1} = 'Is this the same monument as the one before?';
+% Task{15,2} = '1 = yes, same\n2 = no, different';
 
 % control_task = 14; % which task is control task?
 % monuments_task = 15;
-
-%n_rep = ceil(numTrials / 3); % how many repetitions in the control task?
+% 
+% n_rep = ceil(numTrials / 3); % how many repetitions in the control task?
 
 %Task{1,1} = 'What colour is this persons hair?'; %Control or baseline
 %Task{1,2} = '1 = Blond\n2 = Dark\n3 = Other\n4 = Person has no hair';
@@ -95,7 +80,7 @@ debug_mode = 0;
 %Task{6,1} = 'Do you associate this person more with positive or negative emotions?';
 %Task{6,2} = '1 = Very postive emotions\n2 = somewhat positive emotions\n3 = somewhat negative emotions\n4 = negative emotions';
 %Task{7,1} = 'Have you seen this person before'; % semantic access 1
-%Task{7,2} = '1 = Yes, I have\n2 = No, never seen them before';
+%Task{7,2} = '1 = xYes, I have\n2 = No, never seen them before';
 %Task{8,1} = 'If asked to write an essay about this person\nHow much could you write about them?';%semantic access 2
 %Task{8,2} = '1 = Page\n2 = Paragraph\n3 = Sentence\n4 = None';
 %Task{9,1} = 'How common is this persons name?'
@@ -114,38 +99,41 @@ debug_mode = 0;
 %Task{15,2} = '1 = Different face\n2 = Same face
 
 %% load random pics for the experiment
-myTrials = func_testTrials; %getTrials
-
+ %getTrials
 %load('test_myTrials.mat');
 if debug_mode
-  time_to_respond = 0.1;
+    for i = 1 : length(myTrials);
+        myTrials(i).time_to_respond = 0.1;
+    end
     instruct_time = 5; %time in seconds that instructions are on the screen (if not self paced)  
 t_fixCross = 0.1; % time that fixation cross is on the screen
 StimTime = 0.1;
 end
-    
+
+KbName('UnifyKeyNames');
+kbnames = KbName('KeyNames');
+RestrictKeysForKbCheck([44]);
 %myTrials = func_getmyTrials2(numBlocks, numTrials,Task, time_to_respond, fmriblocks, fmriTrials,control_task, monuments_task);
 %myTrials2 = func_getmyTrials2(numBlocks, numTrials, Task, instruct_time, t_fixCross, StimTime, time_to_respond, fmriblocks, fmriTrials);
 %% Set up KbCheck and keyboard related things
-enabledKeyes = [30;31;32;33;44];
-responseKeyes = [30;31;32;33];
-spaceKey = [44];
-keyNames = KbName('KeyNames');
-RestrictKeysForKbCheck(enabledKeyes);
-
+% enabledKeyes = [30;31;32;33;44];
+% responseKeyes = [30;31;32;33];
+% spaceKey = [44];
+% keyNames = KbName('KeyNames');
+% RestrictKeysForKbCheck(enabledKeyes);      212113221212   1223121
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PTB CODE
 
 % set up defaults
-%PsychDefaultSetup(2);
+%% PsychDefaultSetup(2);
 
 % Get the screen numbers
 screens = Screen('Screens');
 
 
-screenNumber = max(screens); % Draw to the external screen if avaliable
+screenNumber = max(screens);% Draw to the external screen if avaliable
 %screenNumber = min(screens); % always draws on the main screen 
-
+screenNumber = 0 % overwrite
 
 % Define black and white
 white = WhiteIndex(screenNumber);
@@ -244,22 +232,6 @@ Screen('BlendFunction', window, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA');
 %% scanner 
 % Wait for first pulse
 
-if scanning
-    try 
-    a=instrfind('Tag', 'SerialResponseBox');fclose(a);
-end
-    Cfg.ScannerSynchShowDefaultMessage = 1;
-    Cfg.synchToScannerPort = 'SERIAL';
-    Cfg.responseDevice = 'LUMINASERIAL';
-    Cfg.serialPortName = 'COM1'
-    Cfg = InitResponseDevice(Cfg); %LUMINA box: ASCII + highest baud rate (115200)
-
-    DrawFormattedText (window, 'WAITING FOR THE SCANNER','center','center');
-    Screen('flip',window);
-    ASF_WaitForScannerSynch([], Cfg);
-    firstPulse=GetSecs;
-    Screen('flip',window);
-end
 
 %% abandoning
 % 
@@ -287,19 +259,52 @@ end
 %         end
 %     end
 % end
+%% Instructions
+
+instruction_dir = '/Users/aidas_el_cap/Desktop/Pilot_pics/';
+ext = '*jpeg';
+nslides = length(dir([instruction_dir ext]));
+slides_list = dir([instruction_dir ext])
+
+n_intro_pics = length(slides_list) - 15 - 1;
+got_it_slide = length(slides_list) - 15;
+question_slides = got_it_slide+1: nslides;
+%intro_pics = dir([instruction_dir intro_prefix ext])
+ intro_pics = slides_list
+ intro_pics = intro_pics(1:n_intro_pics)
+for slide = 1:length(intro_pics)
+theImageLocation = fullfile(instruction_dir,intro_pics(slide).name)
+theImage = imread(theImageLocation);
+imageTexture = Screen('MakeTexture', window, theImage);
+Screen('DrawTexture', window, imageTexture, [], windowRect,0)
+Screen('Flip', window);
+KbWait(-1)
+WaitSecs(0.1)
+end
+
 %%
 ExpStart = GetSecs;
  
-
 %%  BLOCKS here
 % Beginning of a block, task instructions, fixation cross
-for expBlock = 1 : fmriblocks
+for expBlock = 1 : numBlocks
+    %% each block starts with an intro slide:
+    theImageLocation = fullfile(instruction_dir,slides_list(question_slides(expBlock)).name)
+    theImage = imread(theImageLocation);
+    imageTexture = Screen('MakeTexture', window, theImage);
+Screen('DrawTexture', window, imageTexture, [], windowRect,0)
+Screen('Flip', window);
+KbWait(-1)
+WaitSecs(0.1)
+
+theImageLocation = fullfile(instruction_dir,slides_list(got_it_slide).name)
+    theImage = imread(theImageLocation);
+    imageTexture = Screen('MakeTexture', window, theImage);
+Screen('DrawTexture', window, imageTexture, [], windowRect,0)
+Screen('Flip', window);
+KbWait(-1)
+WaitSecs(0.1)
     %% Sets up the task and prompts
-    save(subjID,'myTrials')
-    if expBlock == 18
-        save(subjID)
-        break
-    end
 % %         
 % %    
 % % %     f_lines = find([myTrials.fmriblock] == rf_block(expBlock));
@@ -312,8 +317,8 @@ for expBlock = 1 : fmriblocks
 % %     %taskName = CurrentTask{1,1}{1,1};
 %     %taskIntruct = CurrentTask{1,2}{1,1}
     %expBlock * fmriTrials - fmriTrials + 1
-   taskName = myTrials(expBlock * fmriTrials - fmriTrials + 1).TaskName;
-   taskIntruct = myTrials(expBlock * fmriTrials - fmriTrials + 1).taskIntruct;
+   taskName = myTrials(expBlock * numTrials - numTrials + 1).TaskName;
+   taskIntruct = myTrials(expBlock * numTrials - numTrials + 1).taskIntruct;
 %% 
         %myTrials(Shuffled_faces() + 1).filenames
        %strcmp(myTrials(i_line).TaskName,control_task)
@@ -346,8 +351,19 @@ Screen('Flip', window);
  %t_donereading = GetSecs; % delete
  %RestrictKeysForKbCheck(responseKeyes); % re-enabled response keyes
 %else 
-WaitSecs(instruct_time); % length of time that task and instructions are on the screen
-%end
+if pace == 1
+   % RestrictKeysForKbCheck(spaceKey);
+    pause
+   % RestrictKeysForKbCheck(enabledKeyes);
+elseif pace == 2
+    WaitSecs(instruct_time);
+elseif pace == 3
+    WaitSecs(instruct_time);
+end
+
+    
+ % length of time that task and instructions are on the screen
+%end               nnbsca
 
 fixCrossDimPix = 40;
 
@@ -368,23 +384,22 @@ Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % cha
 %[570 150 870 550]
 % Flip to the screen
 Screen('Flip', window);
-
-WaitSecs(t_fixCross); % Time that fixation cross is on the screen
-%%
-a_t = ceil(GetSecs - ExpStart);
-while GetSecs - ExpStart < a_t
-end
+if pace == 1
+    pause
+elseif pace == 3
+WaitSecs(t_fixCross);
+end% Time that fixation cross is on the screen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% EXPERIMENTAL RUN. 1 loop of code below = 1 trial
 %fmriblocks
   % specify number of iterations
 %for numBlocks * numTrials - 4 = 1 : numBlocks * numTrials
-for ExpTrial = expBlock * fmriTrials - (fmriTrials - 1) : expBlock * fmriTrials; % code that matches blocks, trials, and trials per block
-    %for ExpTrial = 1 : fmriTrials
+for ExpTrial = expBlock * numTrials - (numTrials - 1) : expBlock * numTrials; % code that matches blocks, trials, and trials per block
+%for ExpTrial = 1 : fmriTrials
     pressed=0;
 theImageLocation = myTrials(ExpTrial).filepath; % gets picture from myTrials
 theImage = imread(theImageLocation);
-% time_to_respond = myTrials(ExpTrial).time_to_respond;
+time_to_respond = myTrials(ExpTrial).time_to_respond;
 % Get the size of the image
 [s1, s2, s3] = size(theImage);
 
@@ -411,16 +426,15 @@ imageTexture = Screen('MakeTexture', window, theImage);
  e3 = yCenter - s1/2 - 150;
  e4 = yCenter + s1/2 - 150;
  
- 
-Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);                                     
-%Screen('DrawTexture', window, imageTexture, [], [e1 - 25 e3 - 33 e2 + 25 e4 + 25],0);                                        
+ Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);                                     
+                                      
 %Screen('DrawTexture', window, imagecTexture, [], [570 150 870 550],0); % only works on 1440 * 900 screen 
 %570 870 250 650
 %Screen('DrawTexture', window, imageTexture, [255 255 0], [255 255 0], 0);%
 lower_third = 600;
 
 %DrawFormattedText(window, taskIntruct, 'left', cCenter, white, [],[],[],[],[],[600 600 840 700]); % instructions below the image
-%DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the image
+
 % Flip to the screen
 Screen('Flip', window); % the image is now on the screen
 timePresented = GetSecs - ExpStart;
@@ -431,71 +445,32 @@ myTrials(ExpTrial).time_presented = timePresented;
 %myTrials(ExpTrial).taskIntruct2 = taskIntruct;
 % Wait for two seconds
 %WaitSecs(myTrials(ExpTrial).stimTime); % STIMULUS-ON TIME
-%WaitSecs(myTrials(ExpTrial).time_to_respond); %stimulus is on the screen for a time period specified in myTrials
+%WaitSecs(myTrials(ExpTrial).time_to_r         espond); %stimulus is on the screen for a time period specified in myTrials
 WaitSecs(StimTime);
 % Now fill the screen GREY
 Screen('FillRect', window, grey); % screen  is now blanc
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]);% fix cross after face
-%test instructions
-ins_pos = 0;
-DrawFormattedText(window, taskIntruct, cCenter, 400, white); %default is 600
+%Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
 %DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
+DrawFormattedText(window, taskIntruct, cCenter, 350, white);%test
 % Flip to the screen
-Screen('Flip', window); % fix cross on screen waiting for response
+Screen('Flip', window);% fix cross on screen waiting for response
+t_fix = GetSecs
 %[secs, keyCode, deltaSecs] = KbWait;
 %WaitSecs(time_to_respond)
-%GetSecs - ExpStart < ceil(time_to_respond+t_presented + 0.5 - ExpStart)
-while GetSecs<time_to_respond+t_presented + 0.5 %0.5 offset seems important, dunno why tho
+
+if pace == 1
+    pause
+elseif pace == 3
+    %WaitSecs(time_to_respond)
+    RestrictKeysForKbCheck([30;31;32;33]);
+    [secs button_press c] = KbWait(-1);
+    myTrials(ExpTrial).RT = secs - t_fix; 
+    myTrials(ExpTrial).response = kbnames(find(button_press == 1))
+    RestrictKeysForKbCheck([44]);
+end
 %% scanner button reposne
 % in a while loop when you want to collect the response
-if scanning == true
-if Cfg.hardware.serial.oSerial.BytesAvailable
-    
-    sbuttons = str2num(fscanf(Cfg.hardware.serial.oSerial)); %
-    if pressed==0
-        switch sbuttons
-            case {1, 2, 3, 4}
-RT = GetSecs-t_presented;
-                pressed = 1;
-                response = sbuttons;
-%             case {15, 25, 35, 45}
-%                 
-%                 sbuttons = (sbuttons - 5)/10;
-%                 pressed = 1;
-%                 RT = GetSecs-SoundStart-runStart;
-%                 response = sbuttons;
-%             case 5
-%                 %JUST A SYNCH (unless they also pressed the button)
-   myTrials(ExpTrial).resp=response;
-        %disp([int2str(response) ', ' num2str(RT,4)])
-        myTrials(ExpTrial).RT=RT;
-        end
-     
-    end
-    %t_pressed = GetSecs;
-
-
 end 
-    
-   % Bookmark    PressedKey = keyNames{find(key,'1')};
-end
-if scanning == false 
-   
-    %tt = GetSecs;
-    %while GetSecs < tt + time_to_respond;
-        [a, RT,key] = KbCheck;
-        if a == 1;
-        myTrials(ExpTrial).response = keyNames{find(key,'1')};
-        myTrials(ExpTrial).RT = RT - t_presented;
-        %myTrials(ExpTrial).RT
-        clear a;clear key; clear RT;
-        end
-end
-end
-%myTrials(ExpTrial).duration = GetSecs - t_presented;
-end
-
-
 %end
 %%
 
@@ -506,8 +481,40 @@ end
 % Wait for two secondsl
 %WaitSecs(myTrials(ExpTrial).ISI); % screen is black for a period of time specified in myTrials.ISI
 %ExpTrial = ExpTrial+1;
-end
-%end
+       
+end % End of the self-paced portion of the experiment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%END OF SELF PACED PORTION OF THE EXPERIMENT%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% transition screen
+myTrials_selfPaced = myTrials;
+text = 'Great Job! The Task should be clear by now\nFor the last section we move to a timed portion of this experiment!\nPress SPACE to start'
+Screen('TextSize', window, 28);
+Screen('TextFont', window, 'Courier');
+taskName = 'Hello, this is sample text'
+DrawFormattedText(window, text, 'center', 'center', white);
+Screen('Flip', window);
+RestrictKeysForKbCheck([44]);
+KbWait(-1)
+%%
+
+
+
+
+
+
+
 %writetable(struct2tabhle(myTrials),strcat(num2str(subjID), '.csv')) % after all loops are finished. Save myTrials as csv
 expName = strcat(subjID, {'_Results.mat'});
 wrkspc = strcat(subjID, {'_workspace.mat'});
@@ -515,14 +522,6 @@ save(expName{1,1},'myTrials');
 save(wrkspc{1,1})
 % Clear the screen
 sca;
-
-%to name the variables:
-% for i = 1 : length([myTrials])
-%    a = strsplit(myTrials(i).filepath, '/');
-%     myTrials(i).name = a{2};
-%     myTrials(i).stimKind = a{1};
-% end
-
 
 % 
 % t_now = GetSecs

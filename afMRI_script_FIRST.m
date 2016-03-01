@@ -10,12 +10,7 @@ sca
 % to change instruction language,change variable 'ins' in edit func_testTrials
 % to change between all faces and top40 faces, change exprm = 2; in edit func_getpic5
 
-ins_position = 2;
-
-
-
-
-
+ins_position = 2; % if 2,. instructins replace the fix cross, 1 is default     
 
 %subjID = input('input participant number ','s')
 %subjID = datestr(date)
@@ -24,7 +19,7 @@ numBlocks = 17; % how many blocks to run in experiment if 15 = all blocks will b
 numTrials = 40; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
 t_fixCross = 4; % time that fixation cross is on the screen
-StimTime = .5;
+StimTime = 1;
 time_to_respond = 4 - StimTime;
 fmriblocks = 85;
 fmriTrials = 8;
@@ -437,8 +432,9 @@ myTrials(ExpTrial).time_presented = timePresented;
 WaitSecs(StimTime);
 % Now fill the screen GREY
 Screen('FillRect', window, grey); % screen  is now blanc
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
-DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
+% Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
+% DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
+DrawFormattedText(window, taskIntruct, cCenter, 350, white)
 % Flip to the screen
 Screen('Flip', window); % fix cross on screen waiting for response
 %[secs, keyCode, deltaSecs] = KbWait;
@@ -459,7 +455,7 @@ RT = GetSecs-t_presented;
                 response = sbuttons;
 %             case {15, 25, 35, 45}
 %                 
-%                 sbuttons = (sbuttons - 5)/10;
+ccc%                 sbuttons = (sbuttons - 5)/10;
 %                 pressed = 1;
 %                 RT = GetSecs-SoundStart-runStart;
 %                 response = sbuttons;
