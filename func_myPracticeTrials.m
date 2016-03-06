@@ -1,10 +1,10 @@
 %source(1).filepaths{1,1} %surce(i) name counter, filepaths{i,1} picture counter
 %myTrials = source
 
-function myTrials = func_myPracticeTrials(numTrials);
+function myTrials = func_myPracticeTrials(numTrials,task_order);
 
 %ISI = 3;
-ins = 2
+ins = 4
 time_to_respond = 3.5;
 monuments = 'Monuments/*.jpg';% directory of the faces folder
 monuments2 = 'Monuments';
@@ -59,7 +59,7 @@ Task{16,1} = 'E lo stesso monumento del precedente?';
 Task{16,2} = '1 = Monumento diverso\n2 = Stesso monumento';
 Task{17,1} = 'E lo stesso monumento del precedente?';
 Task{17,2} = '1 = Monumento diverso\n2 = Stesso monumento';
-else 
+elseif ins == 2 
 Task{1,1} = 'What colour is this persons hair?'; %Control or baseline
 Task{1,2} = '1 = Blond\n2 = Dark\n3 = Other\n4 = Person has no hair';
 Task{2,1} = 'How old were you when you first heard of this person?'; %episodic
@@ -77,7 +77,7 @@ Task{7,2} = '1 = Yes, I have\n2 = No, never seen them before';
 Task{8,1} = 'If asked to write an essay about this person\nHow much could you write about them?';%semantic access 2
 Task{8,2} = '1 = Page\n2 = Paragraph\n3 = Sentence\n4 = None';
 Task{9,1} = 'How common is this persons name?';
-Task{9,2} = '1 = Very common\n2 = Not very common\n3 = They are the only person I know with that name\n4 = I dont know this persons name';
+Task{9,2} = '1 = Very common\n2 = Not very common\n3 = Unique name\n4 = Dont know name';
 Task{10,1} = 'How many facts can you remember about this person';
 Task{10,2} = '1 = More than 5 as well as their name\n2 = Four or Five\n3 = Two or three\n4 = Dont know the person';
 Task{11,1} = 'What does this person do?';
@@ -95,17 +95,95 @@ Task{16,1} = 'Is this the same monument as the one before?';
 Task{16,2} = '1 = Different monument\n2 = Same monument';
 Task{17,1} = 'Is this the same monument as the one before?';
 Task{17,2} = '1 = Different monument\n2 = Same monument';
+elseif ins == 3
+Task{1,1} = 'What colour is this persons hair?'; %Control or baseline
+Task{1,2} = '1 = Blond\n2 = Dark\n3 = Other\n4 = Bald';
+Task{2,1} = 'How young were you when you first heard of this person?'; %episodic
+Task{2,2} = '1 = Very\n2 = Not Very\n3 = Somewhat\n4 = Not at all';
+Task{3,1} = 'How physically attractive do you find this person?';
+Task{3,2} = '1 = Very\n2 = Not Very\n3 = Somewhat\n4 = Not at all';
+Task{4,1} = 'How friendly is this person?';
+Task{4,2} = '1 = Very\n2 = Not Very\n3 = Somewhat\n4 = Not at all';
+Task{5,1} = 'How trustworthy is this person?';
+Task{5,2} = '1 = Very\n2 = Not Very\n3 = Somewhat\n4 = Not at all';
+Task{6,1} = 'How strongly do you associate this person with positive emotions (vs negative)';
+Task{6,2} = '1 = Very\n2 = Not Very\n3 = Somewhat\n4 = Not at all';
+Task{7,1} = 'How familiar is this person face to you?'; % semantic access 1
+Task{7,2} = '1 = Very\n2 = Not Very\n3 = Somewhat\n4 = Not at all';
+Task{8,1} = 'How much could you write about this person?';%semantic access 2
+Task{8,2} = '1 = Very\n2 = Not Very\n3 = Some\n4 = None at all';
+Task{9,1} = 'How common is this persons name?';
+Task{9,2} = '1 = Very\n2 = Not Very\n3 = Somewhat\n4 = Not at all';
+Task{10,1} = 'How many facts can you remember about this person';
+Task{10,2} = '1 = More than 5 as well as their name\n2 = Four or Five\n3 = Two or three\n4 = Dont know the person';
+Task{11,1} = 'What does this person do?';
+Task{11,2} = '1 = TV/Movie persona\n2 = Singer/Musician\n3 = Politian/Businessman\n4 = Other/Dont know';
+Task{12,1} = 'How distinct is this persons face to you?';
+Task{12,2} = '1 = Very\n2 = Not Very\n3 = Somewhat\n4 = Not at all';
+Task{13,1} = 'How good (versus bad) as a person do you think they are?';
+Task{13,2} = '1 = Very\n2 = Not Very\n3 = Somewhat\n4 = Not at all';
+Task{14,1} = 'Is this the same face as the one before';
+Task{14,2} = '1 = Different face\n2 = Same face';
+Task{15,1} = 'Is this the same monument as the one before?'; %control
+Task{15,1} = 'Is this the same monument as the one before?';
+Task{15,2} = '1 = Different monument\n2 = Same monument';
+Task{16,1} = 'Is this the same monument as the one before?';
+Task{16,2} = '1 = Different monument\n2 = Same monument';
+Task{17,1} = 'Is this the same monument as the one before?';
+Task{17,2} = '1 = Different monument\n2 = Same monument';
+elseif ins == 4 %new Italian instructions (Elisa's tranlation 2st of March, 2016)
+Task{1,1} = 'Di che colore sono i capelli della persona?'; %Control or baseline
+Task{1,2} = '1 = Bionda\n2 = Scura\n3 = Altro\n4 = Pelata';
+Task{2,1} = 'Quanto eri giovane quando per la prima volta hai sentito parlare di questa persona?'; %episodic
+Task{2,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{3,1} = 'Quanto trovi attraente fisicamente la persona?';
+Task{3,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{4,1} = 'Quanto ? amichevole questa persona?';
+Task{4,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{5,1} = 'Quanto ? affidabile questa persona?';
+Task{5,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{6,1} = 'Quanto fortemente associ questa persona ad emozioni positive?';
+Task{6,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{7,1} = 'Quanto ti ? familiare il volto di questa persona?'; % semantic access 1
+Task{7,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{8,1} = 'Quanto potresti scrivere sulla persona?';%semantic access 2
+Task{8,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{9,1} = 'Quanto ? comune il nome di questa persona?';
+Task{9,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{10,1} = 'Quanti fatti puoi ricordare di questa persona?';
+%Task{10,2} = '1 = More than 5 as well as their name\n2 = Four or Five\n3 = Two or three\n4 = Dont know the person';
+Task{10,2}  = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo'
+Task{11,1} = 'Che cosa fa questa persona di lavoro?';
+Task{11,2} = '1 = Presentatore TV/attore\n2 = Cantante/Musicista\n3 = Politico/Sportivo\n4 = Altro/Non so';
+Task{12,1} = 'Quanto ti ? distintivo il volto di questa persona?';
+Task{12,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{13,1} = 'Quanto ? buona questa persona?';
+Task{13,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{14,1} = 'E lo stesso volto rispetto al precedente?';
+Task{14,2} = '1 = Volto diverso\n2 = Stesso volto';
+Task{15,1} = 'E lo stesso monumento del precedente?'; %control
+Task{15,2} = '1 = Volto diverso\n2 = Stesso volto';
+Task{16,1} = 'E lo stesso monumento del precedente?';
+Task{16,2} = '1 = Volto diverso\n2 = Stesso volto';
+Task{17,1} = 'E lo stesso monumento del precedente?';
+Task{17,2} = '1 = Volto diverso\n2 = Stesso volto';
 end
 %%
 %% Task names and task instructions
+if task_order == 1
 randTask = 1 : 15;
+elseif task_order == 2
+randTask = Shuffle(1:15);
+end
 %randTask = randperm(length(Task));
 for b_count = 1 : numBlocks
 for l_count = b_count * numTrials - (numTrials - 1) : b_count * numTrials;
     myTrials(l_count).TaskName = Task{randTask(b_count),1};
     myTrials(l_count).taskIntruct = Task{randTask(b_count),2};
+    myTrials(l_count).task_number = randTask(b_count);
 end
 end
+
 
 start_line = 1;
 for block_counter = 1: numBlocks
@@ -184,7 +262,7 @@ end
 %a = struct;
 
 
-mon_task_index = find([myTrials.blockNum] == 15);
+mon_task_index = find([myTrials.task_number] == 15);
 for ll = 1 : numTrials;
 % a(ll).name = names(ll).name;
 myTrials(mon_task_index(ll)).filepath = strcat(monuments2, '/',names(ll).name);
@@ -197,7 +275,7 @@ end
     % Adds repetition for control and monuments tasks
    %% Code for the Control Task [Randomly repeats some of the pictures]
 % n_rep has been moved to top of code, next to the parameters
-c_block = find([myTrials.blockNum] == 14);
+c_block = find([myTrials.task_number] == 14);
 c_block(length(c_block)) = [];
 %if CurrentTask{1,1}{1,1} == control_task;
 r_cb = Shuffle(c_block); 
@@ -208,7 +286,7 @@ r_cb = Shuffle(c_block);
 % end of Control Task code
 
 %% Monuments task code 
-m_block = find([myTrials.blockNum] == 15);
+m_block = find([myTrials.task_number] == 15);
 % for i = 1 : numTrials
 %     myTrials(m_block(1) + i - 1).filenames = myTrials(i).monuments;
 % end
