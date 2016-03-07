@@ -7,15 +7,20 @@ Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes.
 sca
 
 %% parameters
+% to change instruction language,change variable 'ins' in edit func_testTrials
+% to change between all faces and top40 faces, change exprm = 2; in edit func_getpic5
+
+ins_position = 2; % if 2,. instructins replace the fix cross, 1 is default     
+
 %subjID = input('input participant number ','s')
 %subjID = datestr(date)
 subjID = 'S99'
-numBlocks = 17; % how many bloccks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
+numBlocks = 17; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = 40; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
-t_fixCross = 5; % time that fixation cross is on the screen
-StimTime = 0.5;
-time_to_respond = 3.5;
+t_fixCross = 4; % time that fixation cross is on the screen
+StimTime = 1;
+time_to_respond = 4 - StimTime;
 fmriblocks = 85;
 fmriTrials = 8;
 debug_mode = 0;
@@ -29,13 +34,13 @@ debug_mode = 0;
 % %% numBlocks * numTrials /
 % fmriblocks = 25;
 % fmriTrials = 13;
-%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
 %%
 
 % control and monument tasks defined below
 %% Tasks
 % Task{1,1} = 'Di che colore sono i capelli di questa persona?'; %Control or baseline
-% Task{1,2} = '1 = Biondi\n2 = Scuri\n3 = Altro\n4 = La persona è calva';
+% Task{1,2} = '1 = Biondi\n2 = Scuri\n3 = Altro\n4 = La persona ? calva';
 % Task{2,1} = 'Quanti anni avevi quando hai sentito parlare\ndi questa persona per la prima volta?'; %episodic
 % Task{2,2} = '1 = Meno di 7 anni\n2 = Tra 8 e 17\n3 = Tra 18 ed ora\n4 = Non ne ho mai sentito parlare';
 % Task{3,1} = 'Quanto ritieni sia fisicamente attraente questa persona?';
@@ -44,19 +49,19 @@ debug_mode = 0;
 % Task{4,2} = '1 = Molto amichevole\n2 = Amichevole\n3 = Non proprio amichevole\n4 = Non mi avvicinerei';
 % Task{5,1} = 'Quanto ritieni sia affidabile questa persona?';
 % Task{5,2} = '1 = Molto affidabile\n2 = Abbastanza affidabile\n3 = Non proprio affidabile\n4 = Assolutamente non affidabile';
-% Task{6,1} = 'Associ questa persona ad emozioni più positive o più negative?';
+% Task{6,1} = 'Associ questa persona ad emozioni pi? positive o pi? negative?';
 % Task{6,2} = '1 = Emozioni molto positive\n2 = Emozioni in qualche modo positive\n3 = Emozioni in qualche modo negative\n4 = Emozioni negative';
 % Task{7,1} = 'Hai mai visto questa persona prima?/Riconosci il suo volto?'; % semantic access 1
-% Task{7,2} = '1 = Sì\n2 = No, mai vista prima';
+% Task{7,2} = '1 = S?\n2 = No, mai vista prima';
 % Task{8,1} = 'Se ti chiedessero di scrivere un tema\nsu questa persona, quanto potresti scrivere?';%semantic access 2
 % Task{8,2} = '1 = Una pagina\n2 = Un paragrafo\n3 = Una frase\n4 = Niente';
-% Task{9,1} = 'Quanto è comune il nome proprio di questa persona?';
+% Task{9,1} = 'Quanto ? comune il nome proprio di questa persona?';
 % Task{9,2} = '1 = Molto comune\n2 = Non molto comune\n3 = E? l?unica persona che conosco con quel nome\n4 = Non conosco il nome di questa persona';
 % Task{10,1} = 'Quanti fatti riesci a ricordare di questa persona?';
-% Task{10,2} = '1 = Più di 5 compreso il suo nome\n2 = Quattro o cinque\n3 = Due o tre\n4 = Non conosco questa persona';
+% Task{10,2} = '1 = Pi? di 5 compreso il suo nome\n2 = Quattro o cinque\n3 = Due o tre\n4 = Non conosco questa persona';
 % Task{11,1} = 'Che lavoro fa questa persona?';
 % Task{11,2} = '1 = Televisivo/Attore\n2 = Cantante/Musicista\n3 = Politico/Uomo d?affari\n4 = Altro/Non so'; %1 = Personaggio televisivo/Attore\n2
-% Task{12,1} = 'Quanto è distintivo e distinguibile il volto di questa persona?';
+% Task{12,1} = 'Quanto ? distintivo e distinguibile il volto di questa persona?';
 % Task{12,2} = '1 = Non lo confonderei con nessun altro\n2 = Abbastanza distintivo\n3 = Confondibile\n4 = Potrebbe essere tranquillamente confuso\n    con qualcun altro';
 % Task{13,1} = 'Considerate tutte le informazioni a tua disposizione\n(se conosci o meno questa persona);\nQuanto ritieni sia brava o cattiva questa persona?';
 % Task{13,2} = '1 = Brava persona\n2 = Sopra la media / una persona per bene\n3 = Sotto la media/non proprio una persona per bene\n4 = Brutta persona';
@@ -107,6 +112,7 @@ debug_mode = 0;
 
 %% load random pics for the experiment
 myTrials = func_testTrials; %getTrials
+
 %load('test_myTrials.mat');
 if debug_mode
   time_to_respond = 0.1;
@@ -402,15 +408,16 @@ imageTexture = Screen('MakeTexture', window, theImage);
  e3 = yCenter - s1/2 - 150;
  e4 = yCenter + s1/2 - 150;
  
- Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);                                     
-                                      
+ 
+Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);                                     
+%Screen('DrawTexture', window, imageTexture, [], [e1 - 25 e3 - 33 e2 + 25 e4 + 25],0);                                        
 %Screen('DrawTexture', window, imagecTexture, [], [570 150 870 550],0); % only works on 1440 * 900 screen 
 %570 870 250 650
 %Screen('DrawTexture', window, imageTexture, [255 255 0], [255 255 0], 0);%
 lower_third = 600;
 
 %DrawFormattedText(window, taskIntruct, 'left', cCenter, white, [],[],[],[],[],[600 600 840 700]); % instructions below the image
-
+%DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the image
 % Flip to the screen
 Screen('Flip', window); % the image is now on the screen
 timePresented = GetSecs - ExpStart;
@@ -425,14 +432,15 @@ myTrials(ExpTrial).time_presented = timePresented;
 WaitSecs(StimTime);
 % Now fill the screen GREY
 Screen('FillRect', window, grey); % screen  is now blanc
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
-DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
+% Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
+% DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
+DrawFormattedText(window, taskIntruct, cCenter, 350, white)
 % Flip to the screen
 Screen('Flip', window); % fix cross on screen waiting for response
 %[secs, keyCode, deltaSecs] = KbWait;
 %WaitSecs(time_to_respond)
 %GetSecs - ExpStart < ceil(time_to_respond+t_presented + 0.5 - ExpStart)
-while GetSecs<time_to_respond+t_presented + 0.5
+while GetSecs<time_to_respond+t_presented + 0.5 %0.5 offset seems important, dunno why tho
 %% scanner button reposne
 % in a while loop when you want to collect the response
 if scanning == true
@@ -447,7 +455,7 @@ RT = GetSecs-t_presented;
                 response = sbuttons;
 %             case {15, 25, 35, 45}
 %                 
-%                 sbuttons = (sbuttons - 5)/10;
+ccc%                 sbuttons = (sbuttons - 5)/10;
 %                 pressed = 1;
 %                 RT = GetSecs-SoundStart-runStart;
 %                 response = sbuttons;
