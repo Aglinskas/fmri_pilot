@@ -2,10 +2,10 @@
 %myTrials = source
 
 function myTrials = func_myPracticeTrials(numTrials,task_order);
-
+% task_order, 1 is 1:15, 2 is randomized
 %ISI = 3;
-ins = 4
-time_to_respond = 3.5;
+ins = 5
+%time_to_respond = 3.5;
 monuments = 'Monuments/*.jpg';% directory of the faces folder
 monuments2 = 'Monuments';
 names = dir(monuments);
@@ -17,9 +17,9 @@ source = func_getPractice;
 %numTrials = length(source);
 %numTrials
 numBlocks = 15;
-num_fmriTrials = 8; % has to divide evenly by numTrials
-num_fmriBlocks = 75; % total number of trials / fmriTrials
-sort = 0; % 1 myTrials in fmri sequence puts, elses
+%num_fmriTrials = 8; % has to divide evenly by numTrials
+%num_fmriBlocks = 75; % total number of trials / fmriTrials
+%sort = 0; % 1 myTrials in fmri sequence puts, elses
 %control_task = Task{14,1};% which task is control task?
 %monuments_task = Task{15,1};
 n_rep = ceil(numTrials / 3);
@@ -151,13 +151,12 @@ Task{8,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{9,1} = 'Quanto e comune il nome di questa persona?';
 Task{9,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{10,1} = 'Quanti fatti puoi ricordare di questa persona?';
-%Task{10,2} = '1 = More than 5 as well as their name\n2 = Four or Five\n3 = Two or three\n4 = Dont know the person';
 Task{10,2}  = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo'
 Task{11,1} = 'Che cosa fa questa persona di lavoro?';
 Task{11,2} = '1 = Presentatore TV/attore\n2 = Cantante/Musicista\n3 = Politico/Sportivo\n4 = Altro/Non so';
 Task{12,1} = 'Quanto ti e distintivo il volto di questa persona?';
 Task{12,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
-Task{13,1} = 'Quanto e integra questa persona??';
+Task{13,1} = 'Quanto e integra questa persona?';
 Task{13,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{14,1} = 'E lo stesso volto rispetto al precedente?';
 Task{14,2} = '1 = Volto diverso\n2 = Stesso volto';
@@ -167,7 +166,43 @@ Task{16,1} = 'E lo stesso monumento del precedente?';
 Task{16,2} = '1 = Volto diverso\n2 = Stesso volto';
 Task{17,1} = 'E lo stesso monumento del precedente?';
 Task{17,2} = '1 = Volto diverso\n2 = Stesso volto';
+elseif ins == 5 % short italina ins
+Task{1,1} = 'Colore dei capelli';
+Task{1,2} = '1 = Bionda\n2 = Scura\n3 = Altro\n4 = Pelata';
+Task{2,1} = 'Prima memoria (quanto remota)?'; %episodic
+Task{2,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{3,1} = 'Quanto attraente?';
+Task{3,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{4,1} = 'Quanto amichevole?';
+Task{4,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{5,1} = 'Quanto affidabile?';
+Task{5,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{6,1} = 'Emozioni positive?';
+Task{6,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{7,1} = 'Quanto familiare?'; % semantic access 1
+Task{7,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{8,1} = 'Quanto scrivere?';%semantic access 2
+Task{8,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{9,1} = 'Comune il nome?';
+Task{9,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{10,1} = 'Quanti fatti ricordare?';
+Task{10,2}  = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{11,1} = 'Che lavoro?';
+Task{11,2} = '1 = Presentatore TV/attore\n2 = Cantante/Musicista\n3 = Politico/Sportivo\n4 = Altro/Non so';
+Task{12,1} = 'Quanto distintivo (volto)?';
+Task{12,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{13,1} = 'Quanto integra?';
+Task{13,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
+Task{14,1} = 'Stesso volto?';
+Task{14,2} = '1 = Volto diverso\n2 = Stesso volto';
+Task{15,1} = 'Stesso monumento?'; %control
+Task{15,2} = '1 = Volto diverso\n2 = Stesso volto';
+Task{16,1} = 'Stesso monumento?';
+Task{16,2} = '1 = Volto diverso\n2 = Stesso volto';
+Task{17,1} = 'Stesso monumento?';
+Task{17,2} = '1 = Volto diverso\n2 = Stesso volto';
 end
+
 %%
 %% Task names and task instructions
 if task_order == 1
@@ -302,10 +337,10 @@ r_cm = Shuffle(m_block);
 
 %%
 
-for i = 1 : length(myTrials);
-%myTrials(i).ISI = ISI;
-myTrials(i).time_to_respond = time_to_respond;
-end
+% for i = 1 : length(myTrials);
+% %myTrials(i).ISI = ISI;
+% myTrials(i).time_to_respond = time_to_respond;
+% end
 
 % %% Skips first trials of control tasks
 % % for monuments task

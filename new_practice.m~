@@ -470,16 +470,18 @@ elseif pace == 3
     if myTrials(ExpTrial).blockNum == 14 && myTrials(ExpTrial).trialnum == 1 || myTrials(ExpTrial).blockNum == 15 && myTrials(ExpTrial).trialnum == 1
             WaitSecs(1);
     else
-        isDown = 0;
-      while GetSecs < t_fix + rsps_time && isDown == 0
+        while GetSecs < t_fix + rsps_time
     RestrictKeysForKbCheck([30;31;32;33]);
-   [isDown secs button_press c] = KbCheck(-1);
+    [isDownsecs button_press c] = KbWait(-1);
     myTrials(ExpTrial).RT = secs - t_fix; 
     myTrials(ExpTrial).response = kbnames(find(button_press == 1));
     RestrictKeysForKbCheck([44]);
-      end
+    break
+        end
     end
 end
+%% scanner button reposne
+% in a while loop when you want to collect the response
 end 
 %end
 %%
