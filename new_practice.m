@@ -130,7 +130,6 @@ RestrictKeysForKbCheck([44]);
 % Get the screen numbers
 screens = Screen('Screens');
 
-
 screenNumber = max(screens);% Draw to the external screen if avaliable
 %screenNumber = min(screens); % always draws on the main screen 
 screenNumber = 0 % overwrite
@@ -329,9 +328,10 @@ WaitSecs(0.1)
       %  a = randperm(numTrials)
        % c_taskTrialsk
     % Task Name
-Screen('TextSize', window, 28);
+Screen('TextSize', window, 28); 
 Screen('TextFont', window, 'Courier');
-DrawFormattedText(window, taskName, 'center', 'center', white);
+%DrawFormattedText(window, taskName, 'center', 'center', white);
+DrawFormattedText(window, taskName, 'center', 350, white); %shift up
 % Task instructions
 Screen('TextSize', window, 24);
 Screen('TextFont', window, 'Courier');
@@ -339,7 +339,8 @@ Screen('TextFont', window, 'Courier');
 lower_third = 600;
 cCenter = xCenter - length(taskIntruct); %change
 %DrawFormattedText(window, taskIntruct, 'center', lower_third, white); % %centers nicely - not justified
-DrawFormattedText(window, taskIntruct, cCenter, lower_third, white);
+DrawFormattedText(window, taskIntruct, cCenter, 'center', white); %shift up
+%DrawFormattedText(window, taskIntruct, cCenter, lower_third, white);
 
 %xCenter
 %DrawFormattedText(window, 'What movies have they been in?', 'center', screenYpixels * 0.15, [1 0 0]);
@@ -465,13 +466,19 @@ t_fix = GetSecs
 
 if pace == 1
     pause
-elseif pace == 3
+elseif pace == 3 % 
     %For the control task, fix cross instead of the confusing prompt
     if myTrials(ExpTrial).blockNum == 14 && myTrials(ExpTrial).trialnum == 1 || myTrials(ExpTrial).blockNum == 15 && myTrials(ExpTrial).trialnum == 1
             WaitSecs(1);
-    else
+   elseif myTrials(ExpTrial).trialnum <= 3 % for the first three practise trials, KBWAIT
+    RestrictKeysForKbCheck([30;31;32;33]);
+   [secs button_press c] = KbWait(-1);
+    myTrials(ExpTrial).RT = secs - t_fix; 
+    myTrials(ExpTrial).response = kbnames(find(button_press == 1));
+    RestrictKeysForKbCheck([44]);
+    elseif myTrials(ExpTrial).trialnum > 3 % after third one, impose time limit
         isDown = 0;
-      while GetSecs < t_fix + rsps_time && isDown == 0
+      while GetSecs < t_fix + rsps_time && isDown == 0 % if they press the button before the time limit, screw it, move on. 
     RestrictKeysForKbCheck([30;31;32;33]);
    [isDown secs button_press c] = KbCheck(-1);
     myTrials(ExpTrial).RT = secs - t_fix; 
@@ -575,7 +582,7 @@ for expBlock = 1 : numBlocks
     % Task Name
 Screen('TextSize', window, 28);
 Screen('TextFont', window, 'Courier');
-DrawFormattedText(window, taskName, 'center', 'center', white);
+DrawFormattedText(window, taskName, 'center', 350, white);
 % Task instructions
 Screen('TextSize', window, 24);
 Screen('TextFont', window, 'Courier');
@@ -583,7 +590,7 @@ Screen('TextFont', window, 'Courier');
 lower_third = 600;
 cCenter = xCenter - length(taskIntruct); %change
 %DrawFormattedText(window, taskIntruct, 'center', lower_third, white); % %centers nicely - not justified
-DrawFormattedText(window, taskIntruct, cCenter, lower_third, white);
+DrawFormattedText(window, taskIntruct, cCenter, 'center', white);
 
 %xCenter
 %DrawFormattedText(window, 'What movies have they been in?', 'center', screenYpixels * 0.15, [1 0 0]);
@@ -697,7 +704,7 @@ WaitSecs(StimTime);
 Screen('FillRect', window, grey); % screen  is now blanc
 %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
 %DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
-DrawFormattedText(window, taskIntruct, cCenter, 350, white);%test
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]);
 % Flip to the screen
 Screen('Flip', window);% fix cross on screen waiting for response
 t_fix = GetSecs
@@ -721,7 +728,7 @@ elseif pace == 2
     if pressed == 1
     myTrials(ExpTrial).RT = secs - t_now; 
     myTrials(ExpTrial).response = kbnames(find(button_press == 1))
-    RestrictKeysForKbCheck([44])
+    RestrictKeysForKbCheck([44]);
     end
     end
 end
