@@ -5,6 +5,7 @@ figure
 for sub=1:length(subInit)
 for ii=1:30;
     % matted=(squareform(squeeze((distMatsForAllTrials_ltv(1,:,ii)))));
+    
     if exist(['./similarityJudgementData/' subInit{sub} '_session1_trial' num2str(ii) '.mat'])
         load(['./similarityJudgementData/' subInit{sub} '_session1_trial' num2str(ii) '.mat'])
     else
