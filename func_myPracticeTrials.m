@@ -134,30 +134,30 @@ Task{17,2} = '1 = Different monument\n2 = Same monument';
 elseif ins == 4 %new Italian instructions (Elisa's tranlation 2st of March, 2016)
 Task{1,1} = 'Di che colore sono i capelli della persona?'; %Control or baseline
 Task{1,2} = '1 = Bionda\n2 = Scura\n3 = Altro\n4 = Pelata';
-Task{2,1} = 'Quanto eri giovane quando per la prima volta hai sentito parlare di questa persona?'; %episodic
+Task{2,1} = 'Quanto eri giovane quando per la prima volta\nhai sentito parlare di questa persona?'; %episodic
 Task{2,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{3,1} = 'Quanto trovi attraente fisicamente la persona?';
 Task{3,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
-Task{4,1} = 'Quanto ? amichevole questa persona?';
+Task{4,1} = 'Quanto e amichevole questa persona?';
 Task{4,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
-Task{5,1} = 'Quanto ? affidabile questa persona?';
+Task{5,1} = 'Quanto e affidabile questa persona?';
 Task{5,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{6,1} = 'Quanto fortemente associ questa persona ad emozioni positive?';
 Task{6,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
-Task{7,1} = 'Quanto ti ? familiare il volto di questa persona?'; % semantic access 1
+Task{7,1} = 'Quanto ti e familiare il volto di questa persona?'; % semantic access 1
 Task{7,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{8,1} = 'Quanto potresti scrivere sulla persona?';%semantic access 2
 Task{8,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
-Task{9,1} = 'Quanto ? comune il nome di questa persona?';
+Task{9,1} = 'Quanto e comune il nome di questa persona?';
 Task{9,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{10,1} = 'Quanti fatti puoi ricordare di questa persona?';
 %Task{10,2} = '1 = More than 5 as well as their name\n2 = Four or Five\n3 = Two or three\n4 = Dont know the person';
 Task{10,2}  = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo'
 Task{11,1} = 'Che cosa fa questa persona di lavoro?';
 Task{11,2} = '1 = Presentatore TV/attore\n2 = Cantante/Musicista\n3 = Politico/Sportivo\n4 = Altro/Non so';
-Task{12,1} = 'Quanto ti ? distintivo il volto di questa persona?';
+Task{12,1} = 'Quanto ti e distintivo il volto di questa persona?';
 Task{12,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
-Task{13,1} = 'Quanto ? buona questa persona?';
+Task{13,1} = 'Quanto e integra questa persona??';
 Task{13,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{14,1} = 'E lo stesso volto rispetto al precedente?';
 Task{14,2} = '1 = Volto diverso\n2 = Stesso volto';

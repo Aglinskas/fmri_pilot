@@ -13,7 +13,7 @@ instruct_time = 2; %time in seconds that instructions are on the screen (if not 
 t_fixCross = 2; % time that fix at nnmn        sd ion cross is on the screen
 StimTime = 0.5;
 time_to_respond = 1;
-rsps_time = 4 - StimTime;
+rsps_time = 4 - StimTime;  
 debug_mode = 0;
 pace = 3;
 %1 = self paced, 2 = timed, 3 = newPractice
