@@ -168,7 +168,7 @@ Task{17,1} = 'E lo stesso monumento del precedente?';
 Task{17,2} = '1 = Volto diverso\n2 = Stesso volto';
 elseif ins == 5 % short italina ins
 Task{1,1} = 'Colore dei capelli';
-Task{1,2} = '1 = Bionda\n2 = Scura\n3 = Altro\n4 = Pelata';
+Task{1,2} = '1 = Bionda\n2 = Scura\n3 = Pelata\n4 = Altro';
 Task{2,1} = 'Prima memoria (quanto remota)?'; %episodic
 Task{2,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{3,1} = 'Quanto attraente?';

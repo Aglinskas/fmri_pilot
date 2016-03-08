@@ -6,7 +6,6 @@ sca;
 myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= italian
 %% parameters
 %subjID = input('input participant number ','s')
-
 subjID = datestr(date)
 numBlocks = 15; % how many blocks                                                                      1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = length(myTrials) / 15; % number of faces to be shown per block
@@ -17,7 +16,6 @@ StimTime = 0.5;
 rsps_time = 4 - StimTime;  
 debug_mode = 0;
 pace = 3;
-encourage = 1;
 % 1 = self paced, 2 = timed, 3 = newPractice
 %% for debbuging 
 % numBlocks = 13; % how many blocks to run    n      mm      in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
@@ -132,7 +130,7 @@ RestrictKeysForKbCheck([44]);
 % Get the screen numbers
 screens = Screen('Screens');
 
-screenNumber = max(screens); % Draw to the external screen if avaliable
+screenNumber = max(screens);% Draw to the external screen if avaliable
 %screenNumber = min(screens); % always draws on the main screen 
 screenNumber = 0 % overwrite
 
@@ -368,7 +366,7 @@ end
  % length of time that task and instructions are on the screen
 %end               nnbsca
 
-fixCrossDimPix = 35;
+fixCrossDimPix = 40;
 
 % Now we set the coordinates (these are all relative to zero we will let
 % the drawing routine center the cross in the cent1er of our monitor for us)
@@ -382,7 +380,7 @@ lineWidthPix = 4;
 % Draw the fixation cross in white, set it to the center of our screen and
 % set good quality antialiasing
 %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter yCenter], 2);
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220]); % change 2350 is the y coord
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % change 2350 is the y coord
 % fix cross %xcros
 %[570 150 870 550]
 % Flip to the screen
@@ -424,10 +422,10 @@ imageTexture = Screen('MakeTexture', window, theImage);
 %Screen('DrawTexture', window, imageTexture, [], [], 0);% instruction in the xcenter and ycenter
                                       %     [], [], 0); imgRect, centerRect(imgRect*2, rect)
   
-e1 = xCenter - s2/2; % right edge of picture
-e2 = xCenter + s2/2; % left edgle of picture
-e3 = yCenter - s1/2 - 150; % top of picture
-e4 = yCenter + s1/2 - 150; % bottom of picture
+ e1 = xCenter - s2/2;
+ e2 = xCenter + s2/2;
+ e3 = yCenter - s1/2 - 150;
+ e4 = yCenter + s1/2 - 150;
  
  Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);                                     
                                       
@@ -455,7 +453,7 @@ Screen('FillRect', window, grey); % screen  is now blanc
 %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
 %DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
 if myTrials(ExpTrial).blockNum == 14 && myTrials(ExpTrial).trialnum == 1 || myTrials(ExpTrial).blockNum == 15 && myTrials(ExpTrial).trialnum == 1
-    Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220])
+    Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350])
     %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]);
 else
 DrawFormattedText(window, taskIntruct, cCenter, 350, white);
@@ -618,7 +616,7 @@ end
  % length of time that task and instructions are on the screen
 %end               nnbsca
 
-fixCrossDimPix = 35;
+fixCrossDimPix = 40;
 
 % Now we set the coordinates (these are all relative to zero we will let
 % the drawing routine center the cross in the cent1er of our monitor for us)
@@ -632,7 +630,7 @@ lineWidthPix = 4;
 % Draw the fixation cross in white, set it to the center of our screen and
 % set good quality antialiasing
 %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter yCenter], 2);
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220]); % change 2350 is the y coord
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % change 2350 is the y coord
 % fix cross %xcros
 %[570 150 870 550]
 % Flip to the screen
@@ -676,10 +674,10 @@ imageTexture = Screen('MakeTexture', window, theImage);
 %Screen('DrawTexture', window, imageTexture, [], [], 0);% instruction in the xcenter and ycenter
                                       %     [], [], 0); imgRect, centerRect(imgRect*2, rect)
   
-e1 = xCenter - s2/2; % right edge of picture
-e2 = xCenter + s2/2; % left edgle of picture
-e3 = yCenter - s1/2 - 150; % top of picture
-e4 = yCenter + s1/2 - 150; % bottom of picture
+ e1 = xCenter - s2/2;
+ e2 = xCenter + s2/2;
+ e3 = yCenter - s1/2 - 150;
+ e4 = yCenter + s1/2 - 150;
  
  Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);                                     
                                       
@@ -706,7 +704,7 @@ WaitSecs(StimTime);
 Screen('FillRect', window, grey); % screen  is now blanc
 %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
 %DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220]);
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]);
 % Flip to the screen
 Screen('Flip', window);% fix cross on screen waiting for response
 t_fix = GetSecs
