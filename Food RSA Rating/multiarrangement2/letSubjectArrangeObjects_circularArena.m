@@ -154,8 +154,8 @@ while ~strcmp(button,'Yes, I am done.')
     end
     
     % subject has pressed done
-    button = questdlg('Are you sure you are done arranging the objects?','','Yes, I am done.','No, I''ll adjust the arrangement.','No, I''ll adjust the arrangement.');
-    
+  %  button = questdlg('Are you sure you are done arranging the objects?','','Yes, I am done.','No, I''ll adjust the arrangement.','No, I''ll adjust the arrangement.');
+    button='Yes, I am done.';
 end
 trialTimeDuration=toc;
 % the subject has indicated again that the arrangement is final.

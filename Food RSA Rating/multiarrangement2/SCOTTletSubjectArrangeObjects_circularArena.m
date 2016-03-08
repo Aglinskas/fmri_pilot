@@ -75,11 +75,15 @@ if nargin>1
 else
     ud.instructionString='[subject instruction string here]'; 
 end
-
+if nargin>3
+    ud.myCoords=varargin{4};
+end
 % arena size
 ud.nObjects=numel(ud.imageData);
 [ud.imHeight,ud.imWidth,ignore]=size(ud.imageData(1).image); % all images assumed to be of the same size
-ud.squareObjWidth=max(ud.imHeight,ud.imWidth); % the axes unit is pixel (in image bmp, not on the screen)
+ud.imHeight=ud.imHeight/3;
+ud.imWidth=ud.imWidth/3;
+ud.squareObjWidth=max(ud.imHeight,ud.imWidth)*1.5; % the axes unit is pixel (in image bmp, not on the screen)
 nObjectsThatWouldFillTheArena=ud.nObjects*3;
 
 if strcmp(ud.options.axisUnits,'Pixels')  % ud.options.axisUnits=='Pixels'
@@ -144,7 +148,7 @@ button='No, I''ll adjust the arrangement.';
 while ~strcmp(button,'Yes, I am done.')
     ud.donePressed=false; set(hf,'UserData',ud);
     while ~ud.donePressed
-        if allInsideArena(hf)
+        if 1%allInsideArena(hf)
             set(hpb2,'Enable','on'); % enable "done" button
         else
             set(hpb2,'Enable','off'); % disable "done" button
@@ -202,11 +206,11 @@ set(ud.ha,'Units',ud.options.axisUnits);
 
 title(ud.ha,ud.instructionString,'FontUnits','normalized','FontSize',.03,'FontWeight','bold');
 set(hf,'Color',[.9 .9 .9]);
-axis(ud.ha,[0 ud.squareAxisWidth 0 ud.squareAxisWidth]);
+axis(ud.ha,[0 ud.squareAxisWidth*2 0 ud.squareAxisWidth]);
 set(ud.ha,'YDir','reverse'); % y axis points down (for image display)
 
 % draw circular arena
-ud.h_arena=rectangle('Position',[ud.squareObjWidth+ud.arenaMargin ud.squareObjWidth+ud.arenaMargin 2*ud.arenaRadius 2*ud.arenaRadius],'Curvature',[1 1],'EdgeColor','none','FaceColor',[1 1 1]);
+ud.h_arena=rectangle('Position',[ud.squareObjWidth+ud.arenaMargin ud.squareObjWidth+ud.arenaMargin 4*ud.arenaRadius 2*ud.arenaRadius],'Curvature',[0 0],'EdgeColor','none','FaceColor',[1 1 1]);
 
 % group selection of objects: add callbacks to axes object
 set(ud.h_arena,'ButtonDownFcn','moveImages(''buttonDown'',''ellipse'')');
@@ -216,15 +220,19 @@ ud.seatingOrder=randperm(ud.nObjects);
 initArrangementRad=ud.arenaRadius+ud.arenaMargin+ud.squareObjWidth/2;
 ud.ctrXY=ud.squareAxisWidth/2;
 angles_rad = 2*pi*(rand + (0:ud.nObjects-1)/ud.nObjects);
-x = cos(angles_rad)*initArrangementRad;
-y = sin(angles_rad)*initArrangementRad;
+% x = cos(angles_rad)*initArrangementRad;
+% y = sin(angles_rad)*initArrangementRad;
 ud.h_image=nan(ud.nObjects,1);
+myCoords=ud.myCoords;
 
+x = myCoords(1,:);
+y = myCoords(2,:);
 for objectI=1:ud.nObjects
     ud.h_image(objectI)=image('XData',ud.ctrXY+x(objectI)-ud.imWidth/2,...
         'YData',ud.ctrXY+y(objectI)-ud.imHeight/2,...
-        'CData',ud.imageData(ud.seatingOrder(objectI)).image,...
+        'CData',ud.imageData((objectI)).image,...% deleted 'ud.seatingOrder'
         'ButtonDownFcn','moveImages(''buttonDown'',''ellipse'')');
+ud.seatingOrder(objectI)=objectI; % slf make match
 
     % use imageData field 'alpha' to define transparency (if alpha exists and is not empty)
     if isfield(ud.imageData(ud.seatingOrder(objectI)),'alpha') && ~isempty(ud.imageData(ud.seatingOrder(objectI)).alpha)

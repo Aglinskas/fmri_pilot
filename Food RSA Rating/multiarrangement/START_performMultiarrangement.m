@@ -1,14 +1,12 @@
 % START_performMultiarrangement
 clear; close all hidden;
 
-%addpath('../WP1_3/multiarrangement')
-addpath([pwd '/multiarrangement'])
-%addpath(genpath(pwd))
+
 %% control variables
 options.sessionI=1;  
 options.axisUnits='normalized'; % images resized
-options.maxSessionLength_min=1.5;
-options.analysisFigs=false;
+options.maxSessionLength_min=inf;
+
 
 %% get subject initials                                         
 options.subjectInitials=inputdlg('Subject initials:');
@@ -17,16 +15,15 @@ options.subjectInitials=options.subjectInitials{1};
 
 %% load stimuli
 % load('myStimuli.mat');
-load('AidasStim.mat');
+load('FoodStim.mat');
 
-%stimuli=rmfield(stimuli,'alpha');
+%         stimuli=rmfield(stimuli,'alpha');
 for ii=1:length(stimuli)
     if ndims(stimuli(ii).alpha)==3
     stimuli(ii).alpha=rgb2gray(stimuli(ii).alpha);
     
     end
 end
-
 stimuli=stimuli(1:numel(stimuli));
 
 
@@ -43,7 +40,7 @@ cd('similarityJudgementData');
 options.dateAndTime_start=clock;
 
 % MULTI-ARRANGEMENT (MA)
-[estimate_dissimMat_ltv_MA,simulationResults_ignore,story_MA]=simJudgmentByMultiArrangement_circArena_liftTheWeakest_SLF(stimuli,'Please arrange these objects according to their similarity',options);
+[estimate_dissimMat_ltv_MA,simulationResults_ignore,story_MA]=simJudgmentByMultiArrangement_circArena_liftTheWeakest(stimuli,'Please arrange these objects according to their similarity',options);
 
 
 %% save experimental data from the current subject
