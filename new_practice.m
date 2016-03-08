@@ -403,6 +403,16 @@ elseif pace == 3 %
     myTrials(ExpTrial).RT = secs - t_fix; 
     myTrials(ExpTrial).response = kbnames(find(button_press == 1));
     RestrictKeysForKbCheck([44]);
+    %% lights up the answer in yellow 
+    rspns = str2num(myTrials(ExpTrial).response{1}(1));
+t = strsplit(taskIntruct,'\\n');
+colors = {255;255;255;255};
+colors{rspns} = [255 255 0];
+[a b] = DrawFormattedText(window, [t{1} '\n'], cCenter, 350, colors{1});
+for i = 2:length(t);
+[a b] = DrawFormattedText(window, [t{i} '\n'], a, b, colors{i});
+end
+Screen('Flip', window);
    end
     elseif myTrials(ExpTrial).trialnum > 3 % after third one, impose time limit
         isDown = 0;
@@ -415,15 +425,25 @@ elseif pace == 3 %
     myTrials(ExpTrial).RT = secs - t_fix; 
     myTrials(ExpTrial).response = kbnames(find(button_press == 1));
     RestrictKeysForKbCheck([44]);
+    %% lights up the answer in yellow 
+    rspns = str2num(myTrials(ExpTrial).response{1}(1));
+t = strsplit(taskIntruct,'\\n');
+colors = {255;255;255;255};
+colors{rspns} = [255 255 0];
+[a b] = DrawFormattedText(window, [t{1} '\n'], cCenter, 350, colors{1});
+for i = 2:length(t);
+[a b] = DrawFormattedText(window, [t{i} '\n'], a, b, colors{i});
+end
+Screen('Flip', window);
     end
     %% encourage
-    if GetSecs >= t_fix + rsps_time && isDown == 0 && encourage == 1
+    if GetSecs >= t_fix + r sps_time && isDown == 0 && encourage == 1
 theImageLocation = 'Other/Faster.jpeg';
 theImage = imread(theImageLocation);
-[s1, s2, s3] = size(theImage);
-e1 = xCenter - s2/2;e2 = xCenter + s2/2;e3 = yCenter - s1/2 - 150; e4 = yCenter + s1/2 - 150;
+[ss1, ss2, ss3] = size(theImage);
+%e1 = xCenter - s2/2;e2 = xCenter + s2/2;e3 = yCenter - s1/2 - 150; e4 = yCenter + s1/2 - 150;
 imageTexture = Screen('MakeTexture', window, theImage);
-Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);
+Screen('DrawTexture', window, imageTexture, [], [xCenter - ss2/2 yCenter - ss1/2 - 150 xCenter + ss2/2 yCenter + ss1/2 - 150],0);
 Screen('Flip', window);
 WaitSecs(1.5);
 Screen('Flip', window);
@@ -433,7 +453,8 @@ WaitSecs(1.5);
     end
     
 end
-[isDown secs button_press c] = deal([]); % reset
+[isDown secs button_press c] = deal([]);% reset
+
 end 
 %end
 %%
@@ -676,6 +697,14 @@ elseif pace == 2
     myTrials(ExpTrial).RT = secs - t_now; 
     myTrials(ExpTrial).response = kbnames(find(button_press == 1))
     RestrictKeysForKbCheck([44]);
+    %% flash fix cross green when pressed
+   tfl = GetSecs;
+    Screen('DrawLines', window, allCoords,lineWidthPix, [0 255 0], [xCenter e4 - 220]);
+Screen('Flip', window);
+while GetSecs < tfl + 0.3 && GetSecs < GetSecs < t_now + rsps_time
+end
+Screen('DrawLines', window, allCoords,lineWidthPix, [255 255 255], [xCenter e4 - 220]);
+Screen('Flip', window);
     end
     end
 end

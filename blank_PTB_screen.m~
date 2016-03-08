@@ -6,7 +6,7 @@ sca;
 screens = Screen('Screens'); % number of screens available
 screenNumber = max(screens);% Draw to the external screen if avaliable
 screenNumber = 1 % which screen to use (0 - main screen; 1 extra screen)
-%% PsychDefaultSetup(2);
+% PsychDefaultSetup(2);
 % Get the screen numbers
 
 %screenNumber = min(screens); % always draws on the main screen 
@@ -27,66 +27,40 @@ ifi = Screen('GetFlipInterval', window);
 [xCenter, yCenter] = RectCenter(windowRect);
 % Set up alpha-blending for smooth (anti-aliased) lines
 Screen('BlendFunction', window, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA');
-%% Screen is blank at this point
-%% get an image on the screen
-theImageLocation = myTrials(randi(150,1)).filepath
-theImage = imread(theImageLocation);
-% image parameters
-[s1, s2, s3] = size(theImage);
+%% %%%%%%%%%%%%%%%%%%%%Screen is blank at this point
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-windowRect % screen dimension
-e1 = xCenter - s2/2; % right edge of picture
-e2 = xCenter + s2/2; % left edgle of picture
-e3 = yCenter - s1/2 - 150; % top of picture
-e4 = yCenter + s1/2 - 150; % bottom of picture
- 
 
-% flips the image
-imageTexture = Screen('MakeTexture', window, theImage);
-Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0)
-
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220])
-%Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 230]);
-
+Screen('TextSize', window, 28); 
+Screen('TextFont', window, 'Courier');
+%DrawFormattedText(window, taskName, 'center', 'center', white);
+DrawFormattedText(window, taskName, 'center', 350, white); %shift up
+% Task instructions
+Screen('TextSize', window, 24);
+Screen('TextFont', window, 'Courier');
+%myTrials_selfPaced = myTrials;
+text = 'Great Job! The Task should be clear by now\nFor the last section we move to a timed portion of this experiment!\nPress SPACE to start'
+Screen('TextSize', window, 28);
+Screen('TextFont', window, 'Courier');
+%taskName = 'Hello, this is sample text'
+DrawFormattedText(window, text, 'center', 'center', white);
 Screen('Flip', window);
-%% draw fixation cross
-
-fixCrossDimPix = 35;
-
-% Now we set the coordinates (these are all relative to zero we will let
-% the drawing routine center the cross in the cent1er of our monitor for us)
-xCoords = [-fixCrossDimPix fixCrossDimPix 0 0];
-yCoords = [0 0 -fixCrossDimPix fixCrossDimPix];
-allCoords = [xCoords; yCoords];
-
-% Set the line width for our fixation cross
-lineWidthPix = 4;
-%
-% Draw the fixation cross in white, set it to the center of our screen and
-% set good quality antialiasing
-%Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter yCenter], 2);
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 244]); 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%% test 
-pace = 1;
-instruct_time = 1
+RestrictKeysForKbCheck([44]);
+KbWait(-1)
+%% intermediate save
+expName = strcat(subjID, {'_Results_SLF_PACE.mat'});
+wrkspc = strcat(subjID, {'_workspace_SLF_PACE.mat'});
+save(expName{1,1},'myTrials');
+save(wrkspc{1,1})
+%% phase 2: timed test phase 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+pace = 2;
 %ExpStart = GetSecs;
 myTrials = func_myPracticeTrials(8,2)
 %%  BLOCKS here
@@ -157,7 +131,7 @@ Screen('Flip', window);
 %else 
 if pace == 1
    % RestrictKeysForKbCheck(spaceKey);
-    pause(0.3)
+    pause
    % RestrictKeysForKbCheck(enabledKeyes);
 elseif pace == 2
     WaitSecs(instruct_time);
@@ -183,13 +157,13 @@ lineWidthPix = 4;
 % Draw the fixation cross in white, set it to the center of our screen and
 % set good quality antialiasing
 %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter yCenter], 2);
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 244]); % change 2350 is the y coord
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220]); % change 2350 is the y coord
 % fix cross %xcros
 %[570 150 870 550]
 % Flip to the screen
 Screen('Flip', window);
 if pace == 1
-    pause(0.3)
+    pause
 elseif pace == 3
 WaitSecs(t_fixCross);
 elseif pace == 2
@@ -257,7 +231,8 @@ WaitSecs(StimTime);
 Screen('FillRect', window, grey); % screen  is now blanc
 %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
 %DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 244]);
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220]);
+Screen('Flip', window);
 % Flip to the screen
 Screen('Flip', window);% fix cross on screen waiting for response
 t_fix = GetSecs
@@ -265,7 +240,7 @@ t_fix = GetSecs
 %WaitSecs(time_to_respond)
 
 if pace == 1
-    pause(0.3)
+    pause
 elseif pace == 3 
     %WaitSecs(time_to_respond)
     RestrictKeysForKbCheck([30;31;32;33]);
@@ -282,6 +257,11 @@ elseif pace == 2
     myTrials(ExpTrial).RT = secs - t_now; 
     myTrials(ExpTrial).response = kbnames(find(button_press == 1))
     RestrictKeysForKbCheck([44]);
+    for i = 1:15
+Screen('DrawLines', window, allCoords,lineWidthPix, [255-i*17 255 255-i*17], [xCenter e4 - 220]);
+Screen('Flip', window);
+WaitSecs(0.1)
+Screen('DrawLines', window, allCoords,lineWidthPix, [255-i*17 255 255-i*17], [xCenter e4 - 220])
     end
     end
 end
@@ -341,15 +321,7 @@ sca;
 %     [a, RT,key] = KbCheck;
 %     if a == 1
 %         break
-%     end
-% end
-
-
-
-
-
-
-
+%     end%
 
 
 
