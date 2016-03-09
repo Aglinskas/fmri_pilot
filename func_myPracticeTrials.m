@@ -169,7 +169,7 @@ Task{17,2} = '1 = Volto diverso\n2 = Stesso volto';
 elseif ins == 5 % short italina ins
 Task{1,1} = 'Colore dei capelli';
 Task{1,2} = '1 = Bionda\n2 = Scura\n3 = Pelata\n4 = Altro';
-Task{2,1} = 'Prima memoria (quanto remota)?'; %episodic
+Task{2,1} = 'Memoria remota?'; %episodic
 Task{2,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{3,1} = 'Quanto attraente?';
 Task{3,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
@@ -181,15 +181,15 @@ Task{6,1} = 'Emozioni positive?';
 Task{6,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{7,1} = 'Quanto familiare?'; % semantic access 1
 Task{7,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
-Task{8,1} = 'Quanto scrivere?';%semantic access 2
+Task{8,1} = 'Quanto scriveresti?';%semantic access 2
 Task{8,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
-Task{9,1} = 'Comune il nome?';
+Task{9,1} = 'Nome comune?';
 Task{9,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
-Task{10,1} = 'Quanti fatti ricordare?';
+Task{10,1} = 'Quanti fatti ricordi?';
 Task{10,2}  = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
-Task{11,1} = 'Che lavoro?';
+Task{11,1} = 'Che lavoro fa?';
 Task{11,2} = '1 = Presentatore TV/attore\n2 = Cantante/Musicista\n3 = Politico/Sportivo\n4 = Altro/Non so';
-Task{12,1} = 'Quanto distintivo (volto)?';
+Task{12,1} = 'Volto distintivo?';
 Task{12,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{13,1} = 'Quanto integra?';
 Task{13,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
