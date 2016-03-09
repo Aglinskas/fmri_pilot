@@ -1,4 +1,3 @@
-% Clear the workspace
 close all;
 %clear all;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
@@ -14,11 +13,10 @@ instruct_time = 4; %time in seconds that instructions are on the screen (if not 
 t_fixCross = 2; % time that fix at nnmn sd ion cross is on the screen
 StimTime = 0.5;
 % time_to_respond = 1;
-rsps_time = 4 - StimTime;  
+rsps_time = 2.5 - StimTime;  
 debug_mode = 0;
 pace = 3;
 encourage = 1;
-
 %% load random pics for the experiment
  %getTrials
 %load('test_myTrials.mat');
@@ -30,7 +28,6 @@ if debug_mode
 t_fixCross = 0.1; % time that fixation cross is on the screen
 StimTime = 0.1;
 end
-
 KbName('UnifyKeyNames');
 kbnames = KbName('KeyNames');
 RestrictKeysForKbCheck([44]);
@@ -48,10 +45,9 @@ RestrictKeysForKbCheck([44]);
 % Get the screen numbers
 screens = Screen('Screens');
 
-screenNumber = max(screens); % Draw to the external screen if avaliable
-%screenNumber = min(screens); % always draws on the main screen 
+%screenNumber = max(screens); % Draw to the external screen if avaliable
+screenNumber = min(screens); % always draws on the main screen 
 %screenNumber = 0 % overwr      ite
-
 % Define black and white
 white = WhiteIndex(screenNumber);
 black = BlackIndex(screenNumber);
@@ -177,7 +173,7 @@ Screen('BlendFunction', window, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA');
 %     end
 % end
 %% Instructions
-
+ExpStart = GetSecs;
 instruction_dir = 'Pilot_pics/';
 ext = '*jpeg';
 nslides = length(dir([instruction_dir ext]));
@@ -200,7 +196,6 @@ WaitSecs(0.1)
 end
 
 %%
-ExpStart = GetSecs;
  
 %%  BLOCKS here
 % Beginning of a block, task instructions, fixation cross
@@ -437,7 +432,7 @@ end
 Screen('Flip', window);
     end
     %% encourage
-    if GetSecs >= t_fix + r sps_time && isDown == 0 && encourage == 1
+    if GetSecs >= t_fix + rsps_time && isDown == 0 && encourage == 1
 theImageLocation = 'Other/Faster.jpeg';
 theImage = imread(theImageLocation);
 [ss1, ss2, ss3] = size(theImage);
@@ -446,6 +441,7 @@ imageTexture = Screen('MakeTexture', window, theImage);
 Screen('DrawTexture', window, imageTexture, [], [xCenter - ss2/2 yCenter - ss1/2 - 150 xCenter + ss2/2 yCenter + ss1/2 - 150],0);
 Screen('Flip', window);
 WaitSecs(1.5);
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220])
 Screen('Flip', window);
 WaitSecs(1.5);
     end
@@ -454,7 +450,7 @@ WaitSecs(1.5);
     
 end
 [isDown secs button_press c] = deal([]);% reset
-
+RestrictKeysForKbCheck([44]);
 end 
 %end
 %%
@@ -495,7 +491,7 @@ KbWait(-1)
 %% intermediate save
 expName = strcat(subjID, {'_Results_SLF_PACE.mat'});
 wrkspc = strcat(subjID, {'_workspace_SLF_PACE.mat'});
-save(expName{1,1},'myTrials');
+save(expName{1,1},'myTrials');     
 save(wrkspc{1,1})
 %% phase 2: timed test phase 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -504,6 +500,7 @@ save(wrkspc{1,1})
 pace = 2;
 %ExpStart = GetSecs;
 myTrials = func_myPracticeTrials(8,2)
+numTrials = length(myTrials) / 15
 %%  BLOCKS here
 % Beginning of a block, task instructions, fixation cross
 for expBlock = 1 : numBlocks

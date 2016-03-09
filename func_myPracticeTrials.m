@@ -196,7 +196,7 @@ Task{13,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{14,1} = 'Stesso volto?';
 Task{14,2} = '1 = Volto diverso\n2 = Stesso volto';
 Task{15,1} = 'Stesso monumento?'; %control
-Task{15,2} = '1 = monumento diverso\n2 = Stesso monumento';
+Task{15,2} = '1 = Monumento diverso\n2 = Stesso monumento';
 % Task{16,1} = 'Stesso monumento?';
 % Task{16,2} = '1 = Volto diverso\n2 = Stesso volto';
 % Task{17,1} = 'Stesso monumento?';

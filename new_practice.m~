@@ -1,4 +1,4 @@
-% Clear the workspace
+      1222114  12112   123   231422  132144  2123   14234   13211342  14434  111123  444444   342  2  12211  111121 1112221212322111334 441224344423444233324431441334324112    212111211% Clear the workspace
 close all;
 %clear all;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
@@ -18,7 +18,6 @@ rsps_time = 4 - StimTime;
 debug_mode = 0;
 pace = 3;
 encourage = 1;
-
 %% load random pics for the experiment
  %getTrials
 %load('test_myTrials.mat');
@@ -30,7 +29,6 @@ if debug_mode
 t_fixCross = 0.1; % time that fixation cross is on the screen
 StimTime = 0.1;
 end
-
 KbName('UnifyKeyNames');
 kbnames = KbName('KeyNames');
 RestrictKeysForKbCheck([44]);
@@ -48,10 +46,9 @@ RestrictKeysForKbCheck([44]);
 % Get the screen numbers
 screens = Screen('Screens');
 
-screenNumber = max(screens); % Draw to the external screen if avaliable
-%screenNumber = min(screens); % always draws on the main screen 
+%screenNumber = max(screens); % Draw to the external screen if avaliable
+screenNumber = min(screens); % always draws on the main screen 
 %screenNumber = 0 % overwr      ite
-
 % Define black and white
 white = WhiteIndex(screenNumber);
 black = BlackIndex(screenNumber);
@@ -437,7 +434,7 @@ end
 Screen('Flip', window);
     end
     %% encourage
-    if GetSecs >= t_fix + r sps_time && isDown == 0 && encourage == 1
+    if GetSecs >= t_fix + rsps_time && isDown == 0 && encourage == 1
 theImageLocation = 'Other/Faster.jpeg';
 theImage = imread(theImageLocation);
 [ss1, ss2, ss3] = size(theImage);
@@ -446,6 +443,7 @@ imageTexture = Screen('MakeTexture', window, theImage);
 Screen('DrawTexture', window, imageTexture, [], [xCenter - ss2/2 yCenter - ss1/2 - 150 xCenter + ss2/2 yCenter + ss1/2 - 150],0);
 Screen('Flip', window);
 WaitSecs(1.5);
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220])
 Screen('Flip', window);
 WaitSecs(1.5);
     end
@@ -454,7 +452,7 @@ WaitSecs(1.5);
     
 end
 [isDown secs button_press c] = deal([]);% reset
-
+RestrictKeysForKbCheck([44]);
 end 
 %end
 %%
@@ -504,6 +502,7 @@ save(wrkspc{1,1})
 pace = 2;
 %ExpStart = GetSecs;
 myTrials = func_myPracticeTrials(8,2)
+numTrials = length(myTrials) / 15
 %%  BLOCKS here
 % Beginning of a block, task instructions, fixation cross
 for expBlock = 1 : numBlocks
@@ -701,7 +700,10 @@ elseif pace == 2
    tfl = GetSecs;
     Screen('DrawLines', window, allCoords,lineWidthPix, [0 255 0], [xCenter e4 - 220]);
 Screen('Flip', window);
-
+while GetSecs < tfl + 0.3 && GetSecs < GetSecs < t_now + rsps_time
+end
+Screen('DrawLines', window, allCoords,lineWidthPix, [255 255 255], [xCenter e4 - 220]);
+Screen('Flip', window);
     end
     end
 end
