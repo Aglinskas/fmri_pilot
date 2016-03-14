@@ -172,30 +172,36 @@ Screen('BlendFunction', window, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA');
 %         
 %%
 
-%% how to respond gif
-gif_dir = '/Users/aidas_el_cap/Desktop/00_fmri_pilot_final/Other/how_to_respond/';
-gif_fls = dir([gif_dir '*jpg'])
-[m1 m2 m3] = size(imread(fullfile(gif_dir,gif_fls(1).name)));
-gif_coords = [windowRect(3)-m2/1.5 windowRect(4)-m1/1.5 windowRect(3) windowRect(4)]
-ts = [2 2 1 0.15 0.15 0.15 0.15 0.15 0.15 0.15 1 0.15 0.15 0.15 0.15 0.15 0.15 0.15 1 0.15 0.15 0.15 0.15 0.15 0.15 0.15 1 0.15 0.15 0.15 0.15 0.15 0.15 0.15];
 
-pressed = 0
-while pressed == 0
-for i = 1: length(gif_fls)
-[pressed secs button_press c] = KbCheck(-1);
-theImageLocation = fullfile(fullfile(gif_dir,gif_fls(i).name));
-theImage = imread(theImageLocation);
-imageTexture = Screen('MakeTexture', window, theImage);
-Screen('DrawTexture', window, imageTexture, [],gif_coords,0)
-Screen('Flip', window);
-[pressed secs button_press c] = KbCheck(-1);
-t = GetSecs;
-while GetSecs < t+ts(i) && pressed == 0
-[pressed secs button_press c] = KbCheck(-1);
-end
-end
-i = 1;
-end
+
+
+
+
+
+%% how to respond gif
+% gif_dir = '/Users/aidas_el_cap/Desktop/00_fmri_pilot_final/Other/how_to_respond/';
+% gif_fls = dir([gif_dir '*jpg'])
+% [m1 m2 m3] = size(imread(fullfile(gif_dir,gif_fls(1).name)));
+% gif_coords = [windowRect(3)-m2/1.5 windowRect(4)-m1/1.5 windowRect(3) windowRect(4)]
+% ts = [2 2 1 0.15 0.15 0.15 0.15 0.15 0.15 0.15 1 0.15 0.15 0.15 0.15 0.15 0.15 0.15 1 0.15 0.15 0.15 0.15 0.15 0.15 0.15 1 0.15 0.15 0.15 0.15 0.15 0.15 0.15];
+% 
+% pressed = 0
+% while pressed == 0
+% for i = 1: length(gif_fls)
+% [pressed secs button_press c] = KbCheck(-1);
+% theImageLocation = fullfile(fullfile(gif_dir,gif_fls(i).name));
+% theImage = imread(theImageLocation);
+% imageTexture = Screen('MakeTexture', window, theImage);
+% Screen('DrawTexture', window, imageTexture, [],gif_coords,0)
+% Screen('Flip', window);
+% [pressed secs button_press c] = KbCheck(-1);
+% t = GetSecs;
+% while GetSecs < t+ts(i) && pressed == 0
+% [pressed secs button_press c] = KbCheck(-1);
+% end
+% end
+% i = 1;
+% end
 
 
 
