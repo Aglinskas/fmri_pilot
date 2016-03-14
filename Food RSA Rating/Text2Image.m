@@ -31,10 +31,11 @@
 % Task{15,2} = '1 = monumento diverso\n2 = Stesso monumento';
 % %% aidas' changes
 
-clear
-stim={ 'ATTRACTIVE','HONEST','MEMORY','FACES','ESSAY', 'ATTRACTIVE','HONEST','MEMORY','FACES','ESSAY'};
+%clear
+%stim={ 'ATTRACTIVE','HONEST','MEMORY','FACES','ESSAY', 'ATTRACTIVE','HONEST','MEMORY','FACES','ESSAY'};
 % stim = Task(1:13,1);
-
+cd('/Users/aidas_el_cap/Desktop/00_fmri_pilot_final/Food RSA Rating')
+stim = Task;
 
 %% rest of code
 for ii=1:length(stim)
@@ -44,16 +45,16 @@ if numel(ind)>0
 RGB = insertText(I,[100 100],stim{ii}(1:ind-1),'FontSize',33); %44
 RGB = insertText(RGB,[100 160],stim{ii}(ind+2:end),'FontSize',33); 
 else
-RGB = insertText(I,[100 100],stim{ii},'FontSize',44);
+RGB = insertText(I,[0 100],stim{ii},'FontSize',44);
 end
-% RGB=imgaussfilt(RGB(:,:,:),0.1);
+%RGB=imgaussfilt(RGB(:,:,:),0.1);
 imshow(RGB)
 
 x=find((RGB(110,:,3))<1);
 x=x(round(length(x)/2));
 y=find((RGB(:,110,3))<1);
 y=y(round(length(y)/2));
-
+x = x+1;
 zeros(size(RGB));
 outIm=squeeze(RGB(y-50:y+59,x-140:x+139,1));
 outIm(:,:,2)=outIm;

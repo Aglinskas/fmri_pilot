@@ -1,23 +1,23 @@
+
 close all;
 %clear all;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
-sca;    %   1  2242111  2332222  2342322  3443323  3223424  2233412  2213221  2434432  3242331  3223333  2312321  4223222  3424412  211212  221121 3232344322132243442432122212233332324242243324212423244323232333212121112333222324324312332322331112211133223221221211 
+sca; %
 myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= italian
 %% parameters
 %subjID = input('input participant number ','s')
-
 subjID = 'Silvia_9th_March'
 numBlocks = 15; % how many blocks                                                                      1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = length(myTrials) / 15; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
 t_fixCross = 2; % time that fix at nnmn sd ion cross is on the screen
 StimTime = 0.5;
-% time_to_respond = 1;
+% time_to_respond = 1;  
 rsps_time = 2.5 - StimTime;  
 debug_mode = 0;
 pace = 3;
 encourage = 1;
-do_MIA == 1 % Multi Item Arrangement launches after the script is done.
+do_MIA = 1 % Multi Item Arrangement launches after the script is done.
 %% load random pics for the experiment
  %getTrials
 %load('test_myTrials.mat');
