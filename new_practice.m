@@ -3,7 +3,7 @@ close all;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca; %
 %% SUBJECT ID
-subjID = 'New_Pilot_subject'
+subjID = 'New_Pilot_subject_test    '
 
 %% get the practise (first half)
 myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= italian
@@ -48,8 +48,8 @@ RestrictKeysForKbCheck([44]);
 % Get the screen numbers
 screens = Screen('Screens');
 
-%screenNumber = max(screens); % Draw to the external screen if avaliable
-screenNumber = min(screens); % always draws on the main screen 
+screenNumber = max(screens); % Draw to the external screen if avaliable
+%screenNumber = min(screens); % always draws on the main screen 
 %screenNumber = 0 % overwr      ite
 % Define black and white
 white = WhiteIndex(screenNumber);
