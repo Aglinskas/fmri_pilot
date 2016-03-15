@@ -261,6 +261,12 @@ DrawFormattedText(window, taskIntruct, cCenter, 'center', white); %shift up
 %xCenter
 %DrawFormattedText(window, 'What movies have they been in?', 'center', screenYpixels * 0.15, [1 0 0]);
 Screen('Flip', window);
+%% Checkpoint save 
+expName = strcat(subjID, {'_Results_SLF_PACE.mat'});
+wrkspc = strcat(subjID, {'_workspace_SLF_PACE.mat'});
+save(expName{1,1},'myTrials');     
+save(wrkspc{1,1})
+%%
 %t_startReading = GetSecs; %delete
 %if instruct_param == 2
 % RestrictKeysForKbCheck(spaceKey); %waits for space
@@ -573,6 +579,13 @@ DrawFormattedText(window, taskIntruct, cCenter, 'center', white);
 %xCenter
 %DrawFormattedText(window, 'What movies have they been in?', 'center', screenYpixels * 0.15, [1 0 0]);
 Screen('Flip', window);
+%% checkpoint save
+expName = strcat(subjID, {'_Results_2run.mat'});
+wrkspc = strcat(subjID, {'_workspace_2run.mat'});
+save(expName{1,1},'myTrials');
+save(wrkspc{1,1})
+%%
+
 %t_startReading = GetSecs; %delete
 %if instruct_param == 2
 % RestrictKeysForKbCheck(spaceKey); %waits for space

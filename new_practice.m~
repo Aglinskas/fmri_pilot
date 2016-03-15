@@ -1,12 +1,14 @@
-
 close all;
 %clear all;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca; %
+%% SUBJECT ID
+subjID = 'New_Pilot_subject_test    '
+
+%% get the practise (first half)
 myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= italian
 %% parameters
 %subjID = input('input participant number ','s')
-subjID = 'Silvia_9th_March'
 numBlocks = 15; % how many blocks                                                                      1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = length(myTrials) / 15; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
@@ -46,8 +48,8 @@ RestrictKeysForKbCheck([44]);
 % Get the screen numbers
 screens = Screen('Screens');
 
-%screenNumber = max(screens); % Draw to the external screen if avaliable
-screenNumber = min(screens); % always draws on the main screen 
+screenNumber = max(screens); % Draw to the external screen if avaliable
+%screenNumber = min(screens); % always draws on the main screen 
 %screenNumber = 0 % overwr      ite
 % Define black and white
 white = WhiteIndex(screenNumber);
@@ -259,6 +261,12 @@ DrawFormattedText(window, taskIntruct, cCenter, 'center', white); %shift up
 %xCenter
 %DrawFormattedText(window, 'What movies have they been in?', 'center', screenYpixels * 0.15, [1 0 0]);
 Screen('Flip', window);
+%% Checkpoint save 
+expName = strcat(subjID, {'_Results_SLF_PACE.mat'});
+wrkspc = strcat(subjID, {'_workspace_SLF_PACE.mat'});
+save(expName{1,1},'myTrials');     
+save(wrkspc{1,1})
+%%
 %t_startReading = GetSecs; %delete
 %if instruct_param == 2
 % RestrictKeysForKbCheck(spaceKey); %waits for space
@@ -496,8 +504,9 @@ theImage = imread(theImageLocation);
 imageTexture = Screen('MakeTexture', window, theImage);
 Screen('DrawTexture', window, imageTexture, [], windowRect,0)
 Screen('Flip', window);
+RestrictKeysForKbCheck([44]);
 KbWait(-1)
-%%       2322122  21133122  1333121   111433233  33333333333333   313322222222233322234  3333333  1231243   112122324443  34443333  33222222    23233312222    23422213   11122122  2111221  2121223223 21222?    
+%%
 %% intermediate save
 expName = strcat(subjID, {'_Results_SLF_PACE.mat'});
 wrkspc = strcat(subjID, {'_workspace_SLF_PACE.mat'});
@@ -570,6 +579,11 @@ DrawFormattedText(window, taskIntruct, cCenter, 'center', white);
 %xCenter
 %DrawFormattedText(window, 'What movies have they been in?', 'center', screenYpixels * 0.15, [1 0 0]);
 Screen('Flip', window);
+
+expName = strcat(subjID, {'_Results_SLF_PACE.mat'});
+wrkspc = strcat(subjID, {'_workspace_SLF_PACE.mat'});
+save(expName{1,1},'myTrials');     
+save(wrkspc{1,1})
 %t_startReading = GetSecs; %delete
 %if instruct_param == 2
 % RestrictKeysForKbCheck(spaceKey); %waits for space
@@ -737,13 +751,15 @@ save(expName{1,1},'myTrials');
 save(wrkspc{1,1})
 %%
 %theImageLocation = fullfile(instruction_dir,intro_pics(slide).name);
+%% Last slide
 theImageLocation = 'Other/Last_slide_rank_Qs.001.jpeg';
 theImage = imread(theImageLocation);
 imageTexture = Screen('MakeTexture', window, theImage);
 Screen('DrawTexture', window, imageTexture, [], windowRect,0)
 Screen('Flip', window);
+RestrictKeysForKbCheck([44])
 KbWait(-1)
-
+%%
 % text = 'All done! thx! ;D\nFor the last task, you will be asked to rank the questioPress any key to exit'
 % Screen('TextSize', window, 28);
 % Screen('TextFont', window, 'Courier');
