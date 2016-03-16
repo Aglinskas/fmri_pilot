@@ -1,6 +1,6 @@
 load('AidasStim.mat')
 
-pics = '/Users/aidas_el_cap/Desktop/Work_files/Task_pics//'
+pics = '/Users/aidas_el_cap/Desktop/Work_files/Task_pics/'
 ext = '*.png'
 a = dir([pics ext])
 
@@ -10,4 +10,4 @@ stimuli(i).alpha = repmat(1,size(imread(fullfile(pics,a(i).name))))
 end
 
 
-save('AidasStim_goodSmall.mat','stimuli')
+save('AidasStim.mat','stimuli')
