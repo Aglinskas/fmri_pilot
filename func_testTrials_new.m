@@ -265,6 +265,4 @@ end % ends the function
     %myTrials(line_prefill2).block_prefill2 = block_prefill2;
     %myTrials(line_prefill).TaskName = Task{randTask(block_prefill),1};
 %end
-%end
-    
-
+%en

@@ -9,107 +9,20 @@ sca
 %% parameters
 % to change instruction language,change variable 'ins' in edit func_testTrials
 % to change between all faces and top40 faces, change exprm = 2; in edit func_getpic5
-
-ins_position = 1; % if 2,. instructins replace the fix cross, 1 is default     
-
+%ins_position = 2; % if 2,. instructins replace the fix cross, 1 is default     
 %subjID = input('input participant number ','s')
 %subjID = datestr(date)
 subjID = 'S99'
-numBlocks = 17; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
+numBlocks = 16; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = 40; % number of faces to be shown per block
-instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
+instruct_time = 5; %time in seconds that instructions are on the screen (if not self paced)  
 t_fixCross = 4; % time that fixation cross is on the screen
-StimTime = 1;
-time_to_respond = 4 - StimTime;
-fmriblocks = 85;
+StimTime = 0.5;
+time_to_respond = 2.5 - StimTime;
+fmriblocks = 80;
 fmriTrials = 8;
 debug_mode = 0;
-%% for debbuging 
-% numBlocks = 13; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
-% numTrials = 25; % number of faces to be shown per block
-% instruct_time = 1; %time in seconds that instructions are on the screen (if not self paced)  
-% t_fixCross = 0.5; % time that fixation cross is on the screen
-% StimTime = 0.5;
-% time_to_respond = 0.5;
-% %% numBlocks * numTrials /
-% fmriblocks = 25;
-% fmriTrials = 13;
-%%%%%%%%%%%%%%%%%%%%%%%
-%%
-
-% control and monument tasks defined below
-%% Tasks
-% Task{1,1} = 'Di che colore sono i capelli di questa persona?'; %Control or baseline
-% Task{1,2} = '1 = Biondi\n2 = Scuri\n3 = Altro\n4 = La persona ? calva';
-% Task{2,1} = 'Quanti anni avevi quando hai sentito parlare\ndi questa persona per la prima volta?'; %episodic
-% Task{2,2} = '1 = Meno di 7 anni\n2 = Tra 8 e 17\n3 = Tra 18 ed ora\n4 = Non ne ho mai sentito parlare';
-% Task{3,1} = 'Quanto ritieni sia fisicamente attraente questa persona?';
-% Task{3,2} = '1 = Molto attraente\n2 = Attraente\n3 = Nella media\n4 = Non proprio attraente';
-% Task{4,1} = 'Quanto ritieni sia amichevole questa persona?';
-% Task{4,2} = '1 = Molto amichevole\n2 = Amichevole\n3 = Non proprio amichevole\n4 = Non mi avvicinerei';
-% Task{5,1} = 'Quanto ritieni sia affidabile questa persona?';
-% Task{5,2} = '1 = Molto affidabile\n2 = Abbastanza affidabile\n3 = Non proprio affidabile\n4 = Assolutamente non affidabile';
-% Task{6,1} = 'Associ questa persona ad emozioni pi? positive o pi? negative?';
-% Task{6,2} = '1 = Emozioni molto positive\n2 = Emozioni in qualche modo positive\n3 = Emozioni in qualche modo negative\n4 = Emozioni negative';
-% Task{7,1} = 'Hai mai visto questa persona prima?/Riconosci il suo volto?'; % semantic access 1
-% Task{7,2} = '1 = S?\n2 = No, mai vista prima';
-% Task{8,1} = 'Se ti chiedessero di scrivere un tema\nsu questa persona, quanto potresti scrivere?';%semantic access 2
-% Task{8,2} = '1 = Una pagina\n2 = Un paragrafo\n3 = Una frase\n4 = Niente';
-% Task{9,1} = 'Quanto ? comune il nome proprio di questa persona?';
-% Task{9,2} = '1 = Molto comune\n2 = Non molto comune\n3 = E? l?unica persona che conosco con quel nome\n4 = Non conosco il nome di questa persona';
-% Task{10,1} = 'Quanti fatti riesci a ricordare di questa persona?';
-% Task{10,2} = '1 = Pi? di 5 compreso il suo nome\n2 = Quattro o cinque\n3 = Due o tre\n4 = Non conosco questa persona';
-% Task{11,1} = 'Che lavoro fa questa persona?';
-% Task{11,2} = '1 = Televisivo/Attore\n2 = Cantante/Musicista\n3 = Politico/Uomo d?affari\n4 = Altro/Non so'; %1 = Personaggio televisivo/Attore\n2
-% Task{12,1} = 'Quanto ? distintivo e distinguibile il volto di questa persona?';
-% Task{12,2} = '1 = Non lo confonderei con nessun altro\n2 = Abbastanza distintivo\n3 = Confondibile\n4 = Potrebbe essere tranquillamente confuso\n    con qualcun altro';
-% Task{13,1} = 'Considerate tutte le informazioni a tua disposizione\n(se conosci o meno questa persona);\nQuanto ritieni sia brava o cattiva questa persona?';
-% Task{13,2} = '1 = Brava persona\n2 = Sopra la media / una persona per bene\n3 = Sotto la media/non proprio una persona per bene\n4 = Brutta persona';
-% Task{14,1} = 'E lo stesso volto rispetto al precedente?'; %control
-% Task{14,2} = '1 = Volto diverso\n2 = Stesso volto';
-% Task{15,1} = 'E lo stesso monumento del precedente?';
-% Task{15,2} = '1 = monumento diverso\n2 = Stesso monumento';
-% Task{16,1} = 'E lo stesso monumento del precedente?';
-% Task{16,2} = '1 = monumento diverso\n2 = Stesso monumento';
-% Task{17,1} = 'E lo stesso monumento del precedente?';
-% Task{17,2} = '1 = monumento diverso\n2 = Stesso monumento';
-
-% control_task = 14; % which task is control task?
-% monuments_task = 15;
-
-%n_rep = ceil(numTrials / 3); % how many repetitions in the control task?
-
-%Task{1,1} = 'What colour is this persons hair?'; %Control or baseline
-%Task{1,2} = '1 = Blond\n2 = Dark\n3 = Other\n4 = Person has no hair';
-%Task{2,1} = 'How old were you when you first heard of this person?'; %episodic
-%Task{2,2} = '1 = Less than 7 years old\n2 = Between 8 and 17\n3 = Between 18 and now\n4 = Never seen the person before';
-%Task{3,1} = 'How attractive do you find this persons face?';
-%Task{3,2} = '1 = Very attractive\n2 = Attractive\n3 = Average\n4 = Not really attractive';
-%Task{4,1} = 'How friendly is this person?';
-%Task{4,2} = '1 = Very friendly\n2 = Friendly\n3 = Not really friendly\n4 = Would not approach';
-%Task{5,1} = 'How trustworthy is this person?';
-%Task{5,2} = '1 = very trustworthy\n2 = quite trustworthy\n3 = not really trustworthy\n4 = not at all trustworthy';
-%Task{6,1} = 'Do you associate this person more with positive or negative emotions?';
-%Task{6,2} = '1 = Very postive emotions\n2 = somewhat positive emotions\n3 = somewhat negative emotions\n4 = negative emotions';
-%Task{7,1} = 'Have you seen this person before'; % semantic access 1
-%Task{7,2} = '1 = Yes, I have\n2 = No, never seen them before';
-%Task{8,1} = 'If asked to write an essay about this person\nHow much could you write about them?';%semantic access 2
-%Task{8,2} = '1 = Page\n2 = Paragraph\n3 = Sentence\n4 = None';
-%Task{9,1} = 'How common is this persons name?'
-%Task{9,2} = '1 = Very common\n2 = Not very common\n3 = They are the only person I know with that name\n4 = I dont know this persons name'
-%Task{10,1} = 'How many facts can you remember about this person'
-%Task{10,2} = '1 = More than 5 as well as their name\n2 = Four or Five\n3 = Two or three\n4 = Dont know the person'
-%Task{11,1} = 'Who is this person?'
-%Task{11,2} = '1 = TV/Movie persona\n2 = Singer/Musician\n3 = Politian/Businessman\n4 = Other/Dont know'
-%Task{12,1} = 'How distinct / distinguishable is this persons face to you?'
-%Task{12,2} = '1 = Would not confuse it with anyone else\n2 = Quite distinct\n3 = Confusable\n4 = Would easily confuse with someone else'
-%Task{13,1} = 'Consider all the information available to you (whether you know the person or not);\nHow good/bad as a person do you think they are?'
-%Task{13,2} = '1 = Good person\n2 = Above average / Decent person\n3 = Below average / Not a good person\n4 = Bad person'
-%Task{14,1} = 'How old were you when you first heard of this person?'; %episodic
-%Task{14,2} = '1 = Ive known them for as long as I can remember\n2 = I was in my teenage years\n3 = As an adult\n4 = Ive Never seen the person before';
-%Task{15,1} = 'Is this the same face as the one before?' %control
-%Task{15,2} = '1 = Different face\n2 = Same face
-
+TR = 2.5;
 %% load random pics for the experiment
 myTrials = func_testTrials; %getTrials
 
@@ -345,7 +258,6 @@ Screen('Flip', window);
 %else 
 WaitSecs(instruct_time); % length of time that task and instructions are on the screen
 %end
-
 fixCrossDimPix = 40;
 
 % Now we set the coordinates (these are all relative to zero we will let
@@ -367,11 +279,12 @@ Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % cha
 Screen('Flip', window);
 
 WaitSecs(t_fixCross); % Time that fixation cross is on the screen
-%%
-a_t = ceil(GetSecs - ExpStart);
+%
+%a_t = ceil(GetSecs - ExpStart);%
+a_t = ceil((GetSecs - ExpStart)/TR)*TR;
 while GetSecs - ExpStart < a_t
 end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% EXPERIMENTAL RUN. 1 loop of code below = 1 trial
 %fmriblocks
   % specify number of iterations
@@ -432,9 +345,9 @@ myTrials(ExpTrial).time_presented = timePresented;
 WaitSecs(StimTime);
 % Now fill the screen GREY
 Screen('FillRect', window, grey); % screen  is now blanc
-% Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
 % DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
-DrawFormattedText(window, taskIntruct, cCenter, 350, white)
+%DrawFormattedText(window, taskIntruct, cCenter, 350, white)
 % Flip to the screen
 Screen('Flip', window); % fix cross on screen waiting for response
 %[secs, keyCode, deltaSecs] = KbWait;
@@ -455,7 +368,7 @@ RT = GetSecs-t_presented;
                 response = sbuttons;
 %             case {15, 25, 35, 45}
 %                 
-ccc%                 sbuttons = (sbuttons - 5)/10;
+%                 sbuttons = (sbuttons - 5)/10;
 %                 pressed = 1;
 %                 RT = GetSecs-SoundStart-runStart;
 %                 response = sbuttons;

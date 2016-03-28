@@ -17,24 +17,17 @@ c_expBlock = expBlock
 when_to_stop = expBlock + 17
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PTB CODE
-
 % set up defaults
 %% PsychDefaultSetup(2);
-
 % Get the screen numbers
 screens = Screen('Screens');
-
-
 screenNumber = max(screens); % Draw to the external screen if avaliable
 %screenNumber = min(screens); % always draws on the main screen 
-
-
 % Define black and white
 white = WhiteIndex(screenNumber);
 black = BlackIndex(screenNumber);
 grey = white / 2;
 inc = white - grey;
-
 % Open an on screen window
 %Takes over the screen
 %[window, windowRect] = PsychImaging('OpenWindow', screenNumber, grey);
@@ -171,7 +164,6 @@ end
 % end
 %%
 ExpStart = GetSecs;
-
 %%  BLOCKS here
 % Beginning of a block, task instructions, fixation cross
 for expBlock = c_expBlock : fmriblocks
@@ -252,7 +244,7 @@ Screen('Flip', window);
 
 WaitSecs(t_fixCross); % Time that fixation cross is on the screen
 %%
-a_t = ceil(GetSecs - ExpStart);
+a_t = ceil((GetSecs - ExpStart)/TR)*TR;
 while GetSecs - ExpStart < a_t
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

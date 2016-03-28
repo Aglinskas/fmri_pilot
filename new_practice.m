@@ -5,11 +5,11 @@ sca; %
 %% SUBJECT ID
 subjID = 'New_Pilot_subject_test    '
 %% get the practise (first half)
-myTrials = func_myPracticeTrials(10,1); %ins = 2, gives english instructions, 1= italian
+myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= italian
 %% parameters
 %subjID = input('input participant number ','s')
-numBlocks = 15; % how many blocks                                                                      1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
-numTrials = length(myTrials) / 15; % number of faces to be shown per block
+numBlocks = 12; % how many blocks                                                                      1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
+numTrials = length(myTrials) / numBlocks; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
 t_fixCross = 2; % time that fix at sd ion cross is on the screen
 StimTime = 0.5;
@@ -18,7 +18,7 @@ rsps_time = 2.5 - StimTime;
 debug_mode = 0;
 pace = 3;
 encourage = 1;
-do_MIA = 1 % Multi Item Arrangement launches after the script is done.
+do_MIA = 0 % Multi Item Arrangement launches after the script is done.
 %% load random pics for the experiment
  %getTrials
 %load('test_myTrials.mat');
@@ -27,7 +27,7 @@ if debug_mode
         myTrials(i).time_to_respond = 0.1;
     end
     instruct_time = 5; %time in seconds that instructions are on the screen (if not self paced)  
-t_fixCross = 0.1; % time that fixation cross is on the screen
+t_fixCross = 0.1; % time that fixation cross is      4312432 on the screen
 StimTime = 0.1;
 end
 KbName('UnifyKeyNames');
@@ -181,8 +181,8 @@ ext = '*jpeg';
 nslides = length(dir([instruction_dir ext]));
 slides_list = dir([instruction_dir ext]);
 
-n_intro_pics = length(slides_list) - 15 - 1;
-got_it_slide = length(slides_list) - 15;
+n_intro_pics = length(slides_list) - 12 - 1;
+got_it_slide = length(slides_list) - 12;
 question_slides = got_it_slide+1: nslides;
 %intro_pics = dir([i  nstruction_dir intro_prefix ext])
  intro_pics = slides_list;
@@ -394,7 +394,7 @@ if pace == 1
     pause
 elseif pace == 3 % 
     %For the control task, fix cross instead of the confusing prompt
-    if myTrials(ExpTrial).blockNum == 14 && myTrials(ExpTrial).trialnum == 1 || myTrials(ExpTrial).blockNum == 15 && myTrials(ExpTrial).trialnum == 1
+    if myTrials(ExpTrial).blockNum == 12 && myTrials(ExpTrial).trialnum == 1 || myTrials(ExpTrial).blockNum == 11 && myTrials(ExpTrial).trialnum == 1
             WaitSecs(1);
    elseif myTrials(ExpTrial).trialnum <= 3 % for the first three practise trials,
     isDown = 0;
@@ -448,10 +448,10 @@ theImage = imread(theImageLocation);
 imageTexture = Screen('MakeTexture', window, theImage);
 Screen('DrawTexture', window, imageTexture, [], [xCenter - ss2/2 yCenter - ss1/2 - 150 xCenter + ss2/2 yCenter + ss1/2 - 150],0);
 Screen('Flip', window);
-WaitSecs(1.5);
+WaitSecs(2);
 Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220])
 Screen('Flip', window);
-WaitSecs(1.5);
+WaitSecs(2);
     end
       end
     end
@@ -517,8 +517,8 @@ save(wrkspc{1,1})
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 pace = 2;
 %ExpStart = GetSecs;
-myTrials = func_myPracticeTrials(10,2)
-numTrials = length(myTrials) / 15
+myTrials = func_myPracticeTrials(7,2)
+numTrials = length(myTrials) / 12
 %%  BLOCKS here
 % Beginning of a block, task instructions, fixation cross
 for expBlock = 1 : numBlocks
@@ -752,6 +752,7 @@ save(expName{1,1},'myTrials');
 save(wrkspc{1,1})
 %%
 %theImageLocation = fullfile(instruction_dir,intro_pics(slide).name);
+if do_MIA == 1
 %% Last slide
 theImageLocation = 'Other/Last_slide_rank_Qs.001.jpeg';
 theImage = imread(theImageLocation);
@@ -761,25 +762,27 @@ Screen('Flip', window);
 RestrictKeysForKbCheck([44])
 KbWait(-1)
 %%
-% text = 'All done! thx! ;D\nFor the last task, you will be asked to rank the questioPress any key to exit'
-% Screen('TextSize', window, 28);
-% Screen('TextFont', window, 'Courier');
-% %taskName = 'Hello, this is sample text'
-% DrawFormattedText(window, text, 'center', 'center', white);
-% Screen('Flip', window);
 %%
 RestrictKeysForKbCheck([44]);
 KbWait(-1)
 sca;
 
-if do_MIA == 1
 % open '/Users/aidas_el_cap/Desktop/00_fmri_pilot_final/Food RSA Rating/Multi_Item_arrangement_instructions.pdf'
 cd 'Food RSA Rating'
 addpath(genpath(pwd))
 run START_performMultiarrangement_AIDAS.m
 end
-%writetable(struct2tabhle(myTrials),strcat(num2str(subjID), '.csv')) % after all loops are finished. Save myTrials as csv
 
+text = 'All Done! :D\nTalk to the experimenter and tell him how awesome you did!'
+Screen('TextSize', window, 28);
+Screen('TextFont', window, 'Courier');
+%taskName = 'Hello, this is sample text'
+DrawFormattedText(window, text, 'center', 'center', white);
+Screen('Flip', window);
+
+
+
+%writetable(struct2tabhle(myTrials),strcat(num2str(subjID), '.csv')) % after all loops are finished. Save myTrials as csv
 % 
 % t_now = GetSecs
 % % while GetSecs < t_now + 10

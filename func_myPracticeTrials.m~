@@ -206,9 +206,9 @@ end
 %%
 %% Task names and task instructions
 if task_order == 1
-randTask = 1 : numBlocks;
+randTask = 1 : 15;
 elseif task_order == 2
-randTask = Shuffle(1:numBlocks);
+randTask = Shuffle(1:15);
 end
 %randTask = randperm(length(Task));
 for b_count = 1 : numBlocks
@@ -297,7 +297,7 @@ end
 %a = struct;
 
 
-mon_task_index = find([myTrials.task_number] == 12);
+mon_task_index = find([myTrials.task_number] == 15);
 for ll = 1 : numTrials;
 % a(ll).name = names(ll).name;
 myTrials(mon_task_index(ll)).filepath = strcat(monuments2, '/',names(ll).name);
@@ -310,7 +310,7 @@ end
     % Adds repetition for control and monuments tasks
    %% Code for the Control Task [Randomly repeats some of the pictures]
 % n_rep has been moved to top of code, next to the parameters
-c_block = find([myTrials.task_number] == 11);
+c_block = find([myTrials.task_number] == 14);
 c_block(length(c_block)) = [];
 %if CurrentTask{1,1}{1,1} == control_task;
 r_cb = Shuffle(c_block); 
@@ -321,7 +321,7 @@ r_cb = Shuffle(c_block);
 % end of Control Task code
 
 %% Monuments task code 
-m_block = find([myTrials.task_number] == 12);
+m_block = find([myTrials.task_number] == 15);
 % for i = 1 : numTrials
 %     myTrials(m_block(1) + i - 1).filenames = myTrials(i).monuments;
 % end
