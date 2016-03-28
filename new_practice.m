@@ -4,15 +4,14 @@ Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes.
 sca; %
 %% SUBJECT ID
 subjID = 'New_Pilot_subject_test    '
-
 %% get the practise (first half)
-myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= italian
+myTrials = func_myPracticeTrials(10,1); %ins = 2, gives english instructions, 1= italian
 %% parameters
 %subjID = input('input participant number ','s')
 numBlocks = 15; % how many blocks                                                                      1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = length(myTrials) / 15; % number of faces to be shown per block
 instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
-t_fixCross = 2; % time that fix at nnmn sd ion cross is on the screen
+t_fixCross = 2; % time that fix at sd ion cross is on the screen
 StimTime = 0.5;
 % time_to_respond = 1;  
 rsps_time = 2.5 - StimTime;  
@@ -518,7 +517,7 @@ save(wrkspc{1,1})
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 pace = 2;
 %ExpStart = GetSecs;
-myTrials = func_myPracticeTrials(8,2)
+myTrials = func_myPracticeTrials(10,2)
 numTrials = length(myTrials) / 15
 %%  BLOCKS here
 % Beginning of a block, task instructions, fixation cross

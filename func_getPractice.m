@@ -7,7 +7,6 @@ names = 'practice_names.txt'; %directory to names.txt
 fileID = fopen(names,'r');
 C = textscan(fileID,'%q %*q %*d %f','Delimiter',',');
 fclose(fileID);
-
 %% Clean invisible files
 % /Volumes/Aidas_HDD/Script_backups/fmri haloween test/Aidas/fmri_pilot/People)
 % s_path = pwd;

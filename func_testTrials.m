@@ -11,14 +11,13 @@ names = dir(monuments);
 names = names(arrayfun(@(x) ~strcmp(x.name(1),'.'),names));
 numTrials = 40;
 
-
 source = func_getpic5();
 %rng((rand * GetSecs));
 %% parameters, fix to feed to the func
 numTrials = 40;
 numBlocks = 17;
 num_fmriTrials = 8; % has to divide evenly by numTrials
-num_fmriBlocks = 85; % total number of trials / fmriTrials
+num_fmriBlocks = numTrials * numBlocks / num_fmriTrials; % total number of trials / fmriTrials
 sort = 1; % 1 myTrials in fmri sequence puts, elses
 %control_task = Task{14,1};% which task is control task?
 %monuments_task = Task{15,1};

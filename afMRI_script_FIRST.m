@@ -10,7 +10,7 @@ sca
 % to change instruction language,change variable 'ins' in edit func_testTrials
 % to change between all faces and top40 faces, change exprm = 2; in edit func_getpic5
 
-ins_position = 2; % if 2,. instructins replace the fix cross, 1 is default     
+ins_position = 1; % if 2,. instructins replace the fix cross, 1 is default     
 
 %subjID = input('input participant number ','s')
 %subjID = datestr(date)
