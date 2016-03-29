@@ -15,7 +15,7 @@ sca
 subjID = 'S99'
 numBlocks = 16; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = 40; % number of faces to be shown per block
-instruct_time = 5; %time in seconds that instructions are on the screen (if not self paced)  
+instruct_time = 6; %time in seconds that instructions are on the screen (if not self paced)  
 t_fixCross = 4; % time that fixation cross is on the screen
 StimTime = 0.5;
 time_to_respond = 2.5 - StimTime;
@@ -62,6 +62,9 @@ white = WhiteIndex(screenNumber);
 black = BlackIndex(screenNumber);
 grey = white / 2;
 inc = white - grey;
+
+%% set up sizes
+%[xCenter, yCenter] = RectCenter(windowRect);
 
 % Open an on screen window
 %Takes over the screen
@@ -151,6 +154,15 @@ Screen('BlendFunction', window, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA');
 % end of Monuments code
 %rf_block = ;
 % rf_block = 1:75;
+%% set up corners
+theImageLocation = myTrials(1).filepath; % gets picture from myTrials
+theImage = imread(theImageLocation);
+[s1, s2, s3] = size(theImage);
+e1 = xCenter - s2/2; % right edge of picture
+e2 = xCenter + s2/2; % left edgle of picture
+e3 = yCenter - s1/2 - 150; % top of picture
+e4 = yCenter + s1/2 - 150; % bottom of picture
+%%
 %% scanner 
 % Wait for first pulse
 
@@ -206,7 +218,7 @@ ExpStart = GetSecs;
 for expBlock = 1 : fmriblocks
     %% Sets up the task and prompts
     save(subjID,'myTrials')
-    if expBlock == 18
+    if expBlock == 17
         save(subjID)
         break
     end
@@ -272,7 +284,7 @@ lineWidthPix = 4;
 % Draw the fixation cross in white, set it to the center of our screen and
 % set good quality antialiasing
 %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter yCenter], 2);
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % change 2350 is the y coord
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220]); % change 2350 is the y coord
 % fix cross %xcros
 %[570 150 870 550]
 % Flip to the screen
@@ -345,7 +357,7 @@ myTrials(ExpTrial).time_presented = timePresented;
 WaitSecs(StimTime);
 % Now fill the screen GREY
 Screen('FillRect', window, grey); % screen  is now blanc
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220]); % fix cross after face
 % DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
 %DrawFormattedText(window, taskIntruct, cCenter, 350, white)
 % Flip to the screen

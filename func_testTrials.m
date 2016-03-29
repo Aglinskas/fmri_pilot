@@ -81,7 +81,7 @@ Task{8,1} = 'Che lavoro fa?';
 Task{8,2} = '1 = Presentatore TV/attore\n2 = Cantante/Musicista\n3 = Politico/Sportivo\n4 = Altro/Non so';
 Task{9,1} = 'Volto distintivo?';
 Task{9,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
-Task{10,1} = 'How confident';
+Task{10,1} = 'Sicuramente conoscere\n(nome e cognome)?';
 Task{10,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 % Task{10,1} = 'Quanto integra?';
 % Task{10,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';

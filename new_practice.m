@@ -10,7 +10,7 @@ myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= 
 %subjID = input('input participant number ','s')
 numBlocks = 12; % how many blocks                                                                      1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = length(myTrials) / numBlocks; % number of faces to be shown per block
-instruct_time = 4; %time in seconds that instructions are on the screen (if not self paced)  
+instruct_time = 6; %time in seconds that instructions are on the screen (if not self paced)  
 t_fixCross = 2; % time that fix at sd ion cross is on the screen
 StimTime = 0.5;
 % time_to_respond = 1;  
@@ -448,10 +448,10 @@ theImage = imread(theImageLocation);
 imageTexture = Screen('MakeTexture', window, theImage);
 Screen('DrawTexture', window, imageTexture, [], [xCenter - ss2/2 yCenter - ss1/2 - 150 xCenter + ss2/2 yCenter + ss1/2 - 150],0);
 Screen('Flip', window);
-WaitSecs(2);
+WaitSecs(1.5);
 Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220])
 Screen('Flip', window);
-WaitSecs(2);
+WaitSecs(1.5);
     end
       end
     end
@@ -779,8 +779,9 @@ Screen('TextFont', window, 'Courier');
 %taskName = 'Hello, this is sample text'
 DrawFormattedText(window, text, 'center', 'center', white);
 Screen('Flip', window);
-
-
+RestrictKeysForKbCheck([]);
+KbWait(-1)
+sca;
 
 %writetable(struct2tabhle(myTrials),strcat(num2str(subjID), '.csv')) % after all loops are finished. Save myTrials as csv
 % 
@@ -806,7 +807,8 @@ Screen('Flip', window);
 % while GetSecs < GetSecs + 5
 % [secs, keyCode, deltaSecs] = KbWait([],[],[]);
 % end
-% %WaitSecs(1);KbCheck
+% %WaitSecs(1);KbCheckrestr
+
 % WaitSecs(1)
 % clear start; clear a
 % start = GetSecs;

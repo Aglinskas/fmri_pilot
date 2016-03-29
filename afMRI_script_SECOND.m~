@@ -15,7 +15,7 @@ subjID = 'S99'
 
 load(subjID)
 c_expBlock = expBlock
-when_to_stop = expBlock + 16
+when_to_stop = expBlock + 17
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PTB CODE
 % set up defaults
@@ -237,7 +237,7 @@ lineWidthPix = 4;
 % Draw the fixation cross in white, set it to the center of our screen and
 % set good quality antialiasing
 %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter yCenter], 2);
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220]); % change 2350 is the y coord
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % change 2350 is the y coord
 % fix cross
 %[570 150 870 550]
 % Flip to the screen
@@ -308,8 +308,8 @@ myTrials(ExpTrial).time_presented = timePresented;
 WaitSecs(StimTime);
 % Now fill the screen GREY
 Screen('FillRect', window, grey); % screen  is now blanc
-Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220]); % fix cross after face
-%DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
+Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
+DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
 % Flip to the screen
 Screen('Flip', window); % fix cross on screen waiting for response
 %[secs, keyCode, deltaSecs] = KbWait;
