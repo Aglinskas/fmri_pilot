@@ -1,7 +1,7 @@
 close all;
 %clear all;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
-sca; %
+sca; %        
 %% SUBJECT ID
 subjID = 'New_Pilot_subject_test    '
 %% get the practise (first half)
@@ -10,7 +10,7 @@ myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= 
 %subjID = input('input participant number ','s')
 numBlocks = 12; % how many blocks                                                                      1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = length(myTrials) / numBlocks; % number of faces to be shown per block
-instruct_time = 6; %time in seconds that instructions are on the screen (if not self paced)  
+instruct_time = 6; %time in se      3223122  24433331  2133432  2224223 4342244  2442341y  4233131  231113  4223313   1134121  221211  122112 2221213241143314232213122433223233112222332321312131412433243433342241233411241111 conds that instructions are on the screen (if not self paced)  
 t_fixCross = 2; % time that fix at sd ion cross is on the screen
 StimTime = 0.5;
 % time_to_respond = 1;  
@@ -249,14 +249,14 @@ Screen('TextFont', window, 'Courier');
 DrawFormattedText(window, taskName, 'center', 350, white); %shift up
 % Task instructions
 Screen('TextSize', window, 24);
-Screen('TextFont', window, 'Courier');
+Screen('TextFont', window, 'Courier');         
 %lower_third = screenYpixels / 3 * 2 + 50;
 lower_third = 600;
-cCenter = xCenter - length(taskIntruct); %change
+cCenter = xCenter - length(taskIntruct); %change            
 %DrawFormattedText(window, taskIntruct, 'center', lower_third, white); % %centers nicely - not justified
-DrawFormattedText(window, taskIntruct, cCenter, 'center', white); %shift up
+DrawFormattedText(window, taskIntruct, cCenter, 450, white); %shift up
 %DrawFormattedText(window, taskIntruct, cCenter, lower_third, white);
-
+      
 %xCenter
 %DrawFormattedText(window, 'What movies have they been in?', 'center', screenYpixels * 0.15, [1 0 0]);
 Screen('Flip', window);
@@ -282,7 +282,6 @@ elseif pace == 2
 elseif pace == 3
     WaitSecs(instruct_time);
 end
-
     
  % length of time that task and instructions are on the screen
 %end               nnbsca
@@ -383,7 +382,7 @@ if myTrials(ExpTrial).blockNum == 14 && myTrials(ExpTrial).trialnum == 1 || myTr
     Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220])
     %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]);
 else
-DrawFormattedText(window, taskIntruct, cCenter, 350, white);
+DrawFormattedText(window, taskIntruct, cCenter, 450, white);
 end%test
 % Flip to the screen 
 Screen('Flip', window);% fix cross on screen waiting for response
@@ -573,7 +572,7 @@ Screen('TextFont', window, 'Courier');
 lower_third = 600;
 cCenter = xCenter - length(taskIntruct); %change
 %DrawFormattedText(window, taskIntruct, 'center', lower_third, white); % %centers nicely - not justified
-DrawFormattedText(window, taskIntruct, cCenter, 'center', white);
+DrawFormattedText(window, taskIntruct, cCenter, 450, white);
 
 %xCenter
 %DrawFormattedText(window, 'What movies have they been in?', 'center', screenYpixels * 0.15, [1 0 0]);

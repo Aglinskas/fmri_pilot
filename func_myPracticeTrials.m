@@ -194,9 +194,9 @@ Task{9,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{10,1} = 'Sicuramente conoscere (nome e cognome)?';
 Task{10,2} = '1 = Moltissimo\n2 = Molto\n3 = Poco\n4 = Pochissimo';
 Task{11,1} = 'Stesso volto?';
-Task{11,2} = '1 = Volto diverso\n2 = Stesso volto';
+Task{11,2} = '1 = Stesso volto\n2 = Volto diverso ';
 Task{12,1} = 'Stesso monumento?'; %control
-Task{12,2} = '1 = Monumento diverso\n2 = Stesso monumento';
+Task{12,2} = '1 = Stesso Monumento \n2 = Monumento diverso';
 % Task{16,1} = 'Stesso monumento?';
 % Task{16,2} = '1 = Volto diverso\n2 = Stesso volto';
 % Task{17,1} = 'Stesso monumento?';

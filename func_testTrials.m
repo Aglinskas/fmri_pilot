@@ -238,8 +238,11 @@ end
 end
 [~,index] = sortrows([myTrials.fmriRun].'); myTrials = myTrials(index); clear index;
 
+
+%rand_fmri_b = [shuffle_conds(1:16);shuffle_conds(17:32);shuffle_conds(33:48);shuffle_conds(49:64);shuffle_conds(65:80)]
+% old shuffling, revert to this if script crashes
 rand_fmri_b = [Shuffle(1:16),Shuffle(17:32),Shuffle(33:48),Shuffle(49:64),Shuffle(65:80)]';
-%rand_fmri_b = [Shuffle(1:17),Shuffle(18:34),Shuffle(35:51),Shuffle(52:68),Shuffle(69:85)]';
+
 s_line = 0;
 for i = 1 : num_fmriBlocks;
     for k = 1: num_fmriTrials;
