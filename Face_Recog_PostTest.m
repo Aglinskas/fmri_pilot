@@ -1,7 +1,7 @@
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca; %        
 %% SUBJECT ID
-subjID = 'S99'
+subjID = 'S_10'
 do_MIA = 1;
 %% Keyboard
 KbName('UnifyKeyNames');
@@ -56,13 +56,13 @@ theImage = imread(theImageLocation);
 imageTexture = Screen('MakeTexture', window, theImage);
 Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);
 
-% Text Yes/No
+% Text Yes/No21233211
 task_name = 'Conosci questa persona?'
 task_ins_text= '1 = Si\n2 = No'
 Screen('TextSize', window, 28); 
 Screen('TextFont', window, 'Courier');
 DrawFormattedText(window, task_ins_text, 'center',yCenter + 100 , white); %shift up
-DrawFormattedText(window, task_name, 'center', 100 , white); %shift up
+DrawFormattedText(window, task_name, 'center', 15 , white); %shift up
 Screen('Flip', window);
 % Keyboard code 
 %% Keyboard code
@@ -80,7 +80,7 @@ colors{rsps} = [0 255 0];
 [a b] = DrawFormattedText(window, [t{1} '\n'], 'center', yCenter + 100, colors{1})
 DrawFormattedText(window, [t{2} '\n'], a, b, colors{2});
 
-DrawFormattedText(window, task_name, 'center', 100 , white); %shift up
+DrawFormattedText(window, task_name, 'center', 15 , white); %shift up
 Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);
 Screen('Flip', window);
 WaitSecs(0.5)

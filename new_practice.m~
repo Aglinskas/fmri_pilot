@@ -5,13 +5,13 @@ sca; %
 %% SUBJECT ID
 subjID = 'New_Pilot_subject_test99'
 %% get the practise (first half)
-myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= italian
+myTrials = func_myPracticeTrials(2       221   12z       22   1   1    1111   1111      11   12   2    2   211   11111 1,1); %ins = 2, gives english instructions, 1= italian
 %% parameters
 numBlocks = 12; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = length(myTrials) / numBlocks; % number of faces to be shown per block
 instruct_time = 6; %
 t_fixCross = 2; % time that fix at sd ion cross is on the screen
-StimTime = 0.5;
+StimTime = 0.5; 
 rsps_time = 2.5 - StimTime;  
 debug_mode = 0;
 pace = 3;

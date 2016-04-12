@@ -3,21 +3,25 @@ close all;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca; %        
 %% SUBJECT ID
-subjID = 'New_Pilot_subject_test99'
+subjID = 'New_Pilot_subject_test9'
 %% get the practise (first half)
 myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= italian
 %% parameters
-numBlocks = 12; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
+%subjID = input('input participant number ','s')
+numBlocks = 12; % how many blocks                  1112                                                          1112 2224  3233               w22222222  1222  1112o run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = length(myTrials) / numBlocks; % number of faces to be shown per block
-instruct_time = 6; %
+instruct_time = 6; %time in se      3223122  24433331  2133432  2224223 4342244  2442341y  4233131  231113  4223313   1134121  221211  122112 2221213241143314232213122433223233112222332321312131412433243433342241233411241111 conds that instructions are on the screen (if not self paced)  
 t_fixCross = 2; % time that fix at sd ion cross is on the screen
 StimTime = 0.5;
+% time_to_respond = 1;  
 rsps_time = 2.5 - StimTime;  
 debug_mode = 0;
 pace = 3;
 encourage = 1;
 do_MIA = 0 % Multi Item Arrangement launches after the script is done.
 %% load random pics for the experiment
+ %getTrials
+%load('test_myTrials.mat');
 if debug_mode
     for i = 1 : length(myTrials);
         myTrials(i).time_to_respond = 0.1;
@@ -29,8 +33,24 @@ end
 KbName('UnifyKeyNames');
 kbnames = KbName('KeyNames');
 RestrictKeysForKbCheck([44]);
+%myTrials = func_getmyTrials2(numBlocks, numTrials,Task, time_to_respond, fmriblocks, fmriTrials,control_task, monuments_task);
+%myTrials2 = func_getmyTrials2(numBlocks, numTrials, Task, instruct_time, t_fixCross, StimTime, time_to_respond, fmriblocks, fmriTrials);
+%% Set up KbCheck and keyboard related things
+% enabledKeyes = [30;31;32;33;44];
+% responseKeyes = [30;31;32;33];
+% spaceKey = [44];
+% keyNames = KbName('KeyNames');
+% RestrictKeysForKbCheck(enabledKeyes);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PTB CODE
+%% PsychDefaultSetup(2);
+% Get the screen numbers
 screens = Screen('Screens');
+
 screenNumber = max(screens); % Draw to the external screen if avaliable
+%screenNumber = min(screens); % always draws on the main screen 
+%screenNumber = 0 % overwr      ite
+% Define black and white
 white = WhiteIndex(screenNumber);
 black = BlackIndex(screenNumber);
 grey = white / 2;
@@ -57,6 +77,103 @@ Screen('BlendFunction', window, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA');
 %theImageLocation = [PsychtoolboxRoot 'PsychDemos' filesep...
  %   'AlphaImageDemo' filesep 'konijntjes1024x768.jpg'];
 %theImage = imread(theImageLocation);
+%% SLF
+%rng(GetSecs);
+% %randTask = randperm(length(Task)); %this is where task vector is randomized
+% randTask = 1 : 15;
+% % Prefill task names so control condition doesnt crash
+% for block_prefill = 1 : numBlocks
+% for line_prefill = block_prefill * numTrials - (numTrials - 1) : block_prefill * numTrials;
+%     myTrials(line_prefill).TaskName = Task{randTask(block_prefill),1};
+%     myTrials(line_prefill).taskIntruct = Task{randTask(block_prefill),2};
+% end
+% end
+% % Sort control task and monunments task mess here.
+% %% Code for the Control Task [Randomly repeats some of the pictures]
+% % n_rep has been moved to top of code, next to the parameters
+% c_block = find([myTrials.blockNum] == 14);
+% c_block(length(c_block))
+% %if CurrentTask{1,1}{1,1} == control_task;
+% r_cb = Shuffle(c_block);  
+%     for i_OW = 1 : n_rep %repeats some of the faces
+%         myTrials(r_cb(i_OW) + 1).filenames = myTrials(r_cb(i_OW)).filenames
+%     end
+% 
+% % end of Control Task code
+% 
+% %% Monuments task code 
+% m_block = find([myTrials.blockNum] == 15);
+% for i = 1 : numTrials
+%     myTrials(m_block(1) + i - 1).filenames = myTrials(i).monuments;
+% end
+% m_block(length(m_block)) = []
+% %if CurrentTask{1,1}{1,1} == control_task;
+% r_cm = Shuffle(m_block);  
+%     for i_OM = 1 : n_rep %repeats some of the faces
+%         myTrials(r_cm(i_OM) + 1).filenames = myTrials(r_cm(i_OM)).filenames
+%     end
+% % fmriblocks
+% %prep = length(myTrials) / fmriblocks
+% 
+% 
+% %monuments_task = Task{15,1}
+% %n_rep = ceil(numTrials / 3); 
+% % c_task_monuments = []; %if CurrentTask{1,1}{1,1} == control_task; if
+% strcmp(CurrentTask{1,1}{1,1}, monuments_task) == 1
+%     % code to put monuments in the right place try cc_trial =
+%     length([myTrials.time_presented]); catch cc_trial = 0 end for m_i = 1
+%     : numTrials
+%         myTrials(cc_trial + m_i).filenames =  myTrials(m_i).monuments
+%     end % Code below repeats some of the pictures total_lines =
+%     length(myTrials); for b_line = 1 : total_lines
+%         if strcmp(myTrials(b_line).TaskName,monuments_task) == 1
+%             
+%             c_task_monuments(length(c_task_monuments) + 1) = b_line
+%             
+%         end
+%     end c_task_monuments(length(c_task_monuments)) = []; % delete the
+%     last item (because the last pic cant be repeated, it would end up
+%     being in the next trials) Shuffled_monuments =
+%     Shuffle(c_task_monuments);
+%     
+%     for i_OWm = 1 : n_rep %repeats some of the faces
+%         myTrials(Shuffled_monuments(i_OWm) + 1).filenames =
+%         myTrials(Shuffled_monuments(i_OWm)).filenames
+%     end
+% end
+% end of Monuments code
+%rf_block = ;
+% rf_block = 1:75;
+%% scanner 
+% Wait for first pulse
+
+
+%% abandoning
+% 
+% Cfg.scannerSynchTimeOutMs = inf
+% hSerial=Cfg.hardware.serial.oSerial;
+% timeoutMilliSeconds=Cfg.scannerSynchTimeOutMs;
+%  
+%  
+% contflag = 1;
+% tStart = GetSecs;
+% while contflag
+%     if hSerial.BytesAvailable
+%         sbuttons = str2num(fscanf(hSerial)); %#ok<ST2NM>
+%         %CLEAN UP IN CASE MONKEY GOES WILD
+%         while hSerial.BytesAvailable
+%             junk = fscanf(hSerial); % #ok<NASGU>
+%         end
+%         if sbuttons == 5
+%             contflag = 0;
+%         end
+%     else
+%         %NOTHING AVAILABLE, CHECK TIMEOUT
+%         if (GetSecs - tStart) > timeoutMilliSeconds/1000
+%             return;
+%         end
+%     end
+% end
 %% Instructions
 ExpStart = GetSecs;
 instruction_dir = 'Pilot_pics/';
@@ -79,6 +196,9 @@ Screen('Flip', window);
 KbWait(-1)
 WaitSecs(0.1)
 end
+
+%%
+ 
 %%  BLOCKS here
 % Beginning of a block, task instructions, fixation cross
 for expBlock = 1 : numBlocks
@@ -99,9 +219,30 @@ Screen('Flip', window);
 KbWait(-1)
 WaitSecs(0.1)
     %% Sets up the task and prompts
+% %         
+% %    
+% % %     f_lines = find([myTrials.fmriblock] == rf_block(expBlock));
+% % %     ff_line = f_lines(1);
+% % %     lf_line = f_lines(length(f_lines))
+% % %     %CurrentTask_num = randTask(expBlock);
+%    CurrentTask_num = ff_line
+%     CurrentTask{1,1} = Task(CurrentTask_num);
+% %     %CurrentTask{1,2} = Task(CurrentTask_num,2);
+% %     %taskName = CurrentTask{1,1}{1,1};
+%     %taskIntruct = CurrentTask{1,2}{1,1}
+    %expBlock * fmriTrials - fmriTrials + 1
    taskName = myTrials(expBlock * numTrials - numTrials + 1).TaskName;
    taskIntruct = myTrials(expBlock * numTrials - numTrials + 1).taskIntruct;
 %% 
+        %myTrials(Shuffled_faces() + 1).filenames
+       %strcmp(myTrials(i_line).TaskName,control_task)
+        
+        % randperm(numTrials)
+        %ceil(2.5)
+        
+      %  a = randperm(numTrials)
+       % c_taskTrialsk
+    % Task Name
 Screen('TextSize', window, 28); 
 Screen('TextFont', window, 'Courier');
 %DrawFormattedText(window, taskName, 'center', 'center', white);
@@ -269,7 +410,7 @@ elseif pace == 3 %
 t = strsplit(taskIntruct,'\\n');
 colors = {255;255;255;255};
 colors{rspns} = [255 255 0];
-[a b] = DrawFormattedText(window, [t{1} '\n'], cCenter, 450, colors{1});
+[a b] = DrawFormattedText(window, [t{1} '\n'], cCenter, 350, colors{1});
 for i = 2:length(t);
 [a b] = DrawFormattedText(window, [t{i} '\n'], a, b, colors{i});
 end
@@ -291,7 +432,7 @@ Screen('Flip', window);
 t = strsplit(taskIntruct,'\\n');
 colors = {255;255;255;255};
 colors{rspns} = [255 255 0];
-[a b] = DrawFormattedText(window, [t{1} '\n'], cCenter, 450, colors{1});
+[a b] = DrawFormattedText(window, [t{1} '\n'], cCenter, 350, colors{1});
 for i = 2:length(t);
 [a b] = DrawFormattedText(window, [t{i} '\n'], a, b, colors{i});
 end
@@ -338,7 +479,7 @@ end % End of the self-paced portion of the experiment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%         21222    222%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -549,7 +690,7 @@ myTrials(ExpTrial).time_presented = timePresented;
 %WaitSecs(myTrials(ExpTrial).stimTime); % STIMULUS-ON TIME
 %WaitSecs(myTrials(ExpTrial).time_to_r         espond); %stimulus is on the screen for a time period specified in myTrials
 WaitSecs(StimTime);
-% Now fill the          1232screen GREY
+% Now fill the screen GREY
 Screen('FillRect', window, grey); % screen  is now blanc
 %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter 350]); % fix cross after face
 %DrawFormattedText(window, taskIntruct, cCenter, lower_third, white); % instructions below the fix cross
@@ -625,6 +766,8 @@ KbWait(-1)
 RestrictKeysForKbCheck([44]);
 KbWait(-1)
 sca;
+
+% open '/Users/aidas_el_cap/Desktop/00_fmri_pilot_final/Food RSA Rating/Multi_Item_arrangement_instructions.pdf'
 cd 'Food RSA Rating'
 addpath(genpath(pwd))
 run START_performMultiarrangement_AIDAS.m
@@ -633,8 +776,45 @@ end
 text = 'All Done! :D\nTalk to the experimenter and tell him how awesome you did!'
 Screen('TextSize', window, 28);
 Screen('TextFont', window, 'Courier');
+%taskName = 'Hello, this is sample text'
 DrawFormattedText(window, text, 'center', 'center', white);
 Screen('Flip', window);
 RestrictKeysForKbCheck([]);
 KbWait(-1)
 sca;
+
+%writetable(struct2tabhle(myTrials),strcat(num2str(subjID), '.csv')) % after all loops are finished. Save myTrials as csv
+% 
+% t_now = GetSecs
+% % while GetSecs < t_now + 10
+% KbCheck
+% end
+
+
+% enabledKeyes = [30;31;32;33;44];
+% responseKeyes = [30;31;32;33];
+% spaceKey = [44];
+% keyNames = KbName('KeyNames');
+% RestrictKeysForKbCheck(enabledKeyes);
+% 
+% 
+% %[secs, keyCode, deltaSecs] = KbWait([],[],[])
+% %WaitSecs(1);KbWait([],[],[5])
+% t_wait = GetSecs + 10
+% % WaitSecs(1);KbWait([],[],[t_wait])
+% % 
+% % GetSecs - ans
+% while GetSecs < GetSecs + 5
+% [secs, keyCode, deltaSecs] = KbWait([],[],[]);
+% end
+% %WaitSecs(1);KbCheckrestr
+
+% WaitSecs(1)
+% clear start; clear a
+% start = GetSecs;
+% while GetSecs < start + 5;
+%     [a, RT,key] = KbCheck;
+%     if a == 1
+%         break
+%     end
+% end

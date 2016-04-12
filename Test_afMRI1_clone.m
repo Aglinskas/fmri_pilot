@@ -378,6 +378,11 @@ if Cfg.hardware.serial.oSerial.BytesAvailable
 RT = GetSecs-t_presented;
                 pressed = 1;
                 response = sbuttons;
+                % turn green 
+Screen('DrawLines', window, allCoords,lineWidthPix, [0 255 0], [xCenter e4 - 220]);                
+                
+                
+                
 %Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220]);
 % test if works
 
