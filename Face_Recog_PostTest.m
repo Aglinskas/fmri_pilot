@@ -1,7 +1,7 @@
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca; %        
 %% SUBJECT ID
-subjID = 'S_10'
+subjID = 'S_Test' 
 do_MIA = 1;
 %% Keyboard
 KbName('UnifyKeyNames');
@@ -9,11 +9,11 @@ kbnames = KbName('KeyNames');
 RestrictKeysForKbCheck([]);
 %%
 % PsychDefaultSetup(2);
-% Get the screen numbers
+% Get the screen numbers 
 screens = Screen('Screens');
 screenNumber = max(screens); % Draw to the external screen if avaliable
 %screenNumber = min(screens); % always draws on the main screen 
-%screenNumber = 0 % overwr      ite
+%screenNumber = 0 % overwrite
 % Define black and white
 white = WhiteIndex(screenNumber);
 black = BlackIndex(screenNumber);
@@ -106,6 +106,7 @@ cd 'Food RSA Rating'
 addpath(genpath(pwd))
 run START_performMultiarrangement_AIDAS.m
 end
+cd /Users/aidas_el_cap/Desktop/00_fmri_pilot_final/
 %%
 % rspns = str2num(myTrials(ExpTrial).response{1}(1));
 % t = strsplit(taskIntruct,'\\n');
@@ -117,14 +118,8 @@ end
 % end
 % Screen('Flip', window);
 %%
-
-
-
-
-
 % [s1 s2 s3] = size(imread(myTrials(1).filepath));
 % e1 = xCenter - s2/2; % right edge of picture
 % e2 = xCenter + s2/2; % left edgle of picture
 % e3 = yCenter - s1/2 - 150; % top of picture
 % e4 = yCenter + s1/2 - 150; % bottom of picture
-%%

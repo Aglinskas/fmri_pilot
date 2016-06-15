@@ -2,10 +2,10 @@ close all;
 %clear all;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca; %        
-%% SUBJECT ID
-subjID = 'New_Pilot_subject_test99'
+%% SUBJECT ID       
+subjID = 'New_Pilot_subject_test3'
 %% get the practise (first half)
-myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= italian
+myTrials = func_myPracticeTrials(5,1); %ins = 2, gives english instructions, 1= italian
 %% parameters
 numBlocks = 12; % how many blocks to run in experiment if 15 = all blocks will be presented in a random order, if less, a random subset of tasks will be selected
 numTrials = length(myTrials) / numBlocks; % number of faces to be shown per block
@@ -375,7 +375,7 @@ save(wrkspc{1,1})
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 pace = 2;
 %ExpStart = GetSecs;
-myTrials = func_myPracticeTrials(7,2)
+myTrials = func_myPracticeTrials(5,2)
 numTrials = length(myTrials) / 12
 %%  BLOCKS here
 % Beginning of a block, task instructions, fixation cross
@@ -490,7 +490,7 @@ elseif pace == 3
 WaitSecs(t_fixCross);
 elseif pace == 2
     WaitSecs(t_fixCross);
-end% Time that fixation cross is on the screen
+end %Time that fixation cross is on the screen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% EXPERIMENTAL RUN. 1 loop of code below = 1 trial
 %fmriblocks

@@ -1,4 +1,4 @@
-r% Clear the workspace
+% Clear the workspace
 close all;
 %clear all;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 

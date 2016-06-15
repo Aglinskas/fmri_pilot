@@ -182,7 +182,6 @@ end
     firstPulse=GetSecs;
     Screen('flip',window);
 end
-
 %% abandoning
 % 
 % Cfg.scannerSynchTimeOutMs = inf
