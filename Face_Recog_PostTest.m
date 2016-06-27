@@ -1,7 +1,7 @@
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca; %        
 %% SUBJECT ID
-subjID = 'S_Test' 
+subjID = 'test'
 do_MIA = 1;
 %% Keyboard
 KbName('UnifyKeyNames');
@@ -49,8 +49,6 @@ e4 = yCenter + s1/2 - 150; % bottom of picture
 %%
 
 for face = 1:length(recog)
-save([subjID '_recog'],'recog')
-
 theImageLocation = list(face).filepaths{1}{1}; % gets picture from list
 theImage = imread(theImageLocation);
 imageTexture = Screen('MakeTexture', window, theImage);
@@ -85,7 +83,9 @@ Screen('DrawTexture', window, imageTexture, [], [e1 e3 e2 e4],0);
 Screen('Flip', window);
 WaitSecs(0.5)
 %Screen('Flip', window);WaitSecs(0.5)
+save([subjID '_recog'],'recog')
 end
+
 if do_MIA == 1
 %% Last slide
 theImageLocation = 'Other/Last_slide_rank_Qs.001.jpeg';
