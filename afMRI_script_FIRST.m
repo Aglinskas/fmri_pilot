@@ -165,7 +165,6 @@ e4 = yCenter + s1/2 - 150; % bottom of picture
 %%
 %% scanner 
 % Wait for first pulse
-
 if scanning
     try 
     a=instrfind('Tag', 'SerialResponseBox');fclose(a);
@@ -369,7 +368,6 @@ while GetSecs<time_to_respond+t_presented + 0.5 %0.5 offset seems important, dun
 % in a while loop when you want to collect the response
 if scanning == true
 if Cfg.hardware.serial.oSerial.BytesAvailable
-    
     sbuttons = str2num(fscanf(Cfg.hardware.serial.oSerial)); %
     if pressed==0
         switch sbuttons
@@ -377,30 +375,14 @@ if Cfg.hardware.serial.oSerial.BytesAvailable
 RT = GetSecs-t_presented;
                 pressed = 1;
                 response = sbuttons;
-%Screen('DrawLines', window, allCoords,lineWidthPix, white, [xCenter e4 - 220]);
-% test if works
-
-%             case {15, 25, 35, 45}
-%                 
-%                 sbuttons = (sbuttons - 5)/10;
-%                 pressed = 1;
-%                 RT = GetSecs-SoundStart-runStart;
-%                 response = sbuttons;
-%             case 5
-%                 %JUST A SYNCH (unless they also pressed the button)
    myTrials(ExpTrial).resp=response;
         %disp([int2str(response) ', ' num2str(RT,4)])
         myTrials(ExpTrial).RT=RT;
         end
     end
-    %t_pressed = GetSecs
 end 
-    
-   % Bookmark    PressedKey = keyNames{find(key,'1')};
 end
 if scanning == false 
-    %tt = GetSecs;
-    %while GetSecs < tt + time_to_respond;
         [a, RT,key] = KbCheck;
         if a == 1;
         myTrials(ExpTrial).response = keyNames{find(key,'1')};

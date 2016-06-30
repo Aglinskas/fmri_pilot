@@ -1,7 +1,7 @@
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca; %        
 %% SUBJECT ID
-subjID = 'test'
+subjID = 'Sub31'
 do_MIA = 1;
 %% Keyboard
 KbName('UnifyKeyNames');

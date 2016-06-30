@@ -3,7 +3,7 @@ close all;
 Screen('Preference', 'SkipSyncTests', 1); % disable if script crashes. 
 sca; %              zazzmaz  zkmaakm  azzmzam  zmkzzam  kzamkaz  mazzmkm  mzmzazm  aaaammz  zmkazzm  azaaaam  zazaza  aazazz zkkmzza zaaaamazkkkzaazmmzzazmzmamamaaz
 %% SUBJECT ID
-subjID = 'New_Pilot_26_17th'%'New_Pilot_subject_15'w
+subjID = 'New_Pilot_31_30th'%'New_Pilot_subject_15'w
 %% get the practise (first half)
 myTrials = func_myPracticeTrials(7,1); %ins = 2, gives english instructions, 1= italian
 %% parameters
